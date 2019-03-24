@@ -1,0 +1,410 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>04-2.pause容器 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="pod-lifecycle.html" />
+    
+    
+    <link rel="prev" href="pod-overview.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="design.html">
+            
+                <a href="design.html">
+            
+                    
+                    01-1.Kubernetes 设计原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="object.html">
+            
+                <a href="object.html">
+            
+                    
+                    02-1.Kubernetes 对象介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="kubectl.html">
+            
+                <a href="kubectl.html">
+            
+                    
+                    03-1.kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="pod-state-and-lifecycle.html">
+            
+                <a href="pod-state-and-lifecycle.html">
+            
+                    
+                    04.pod状态与生命周期管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="pod-overview.html">
+            
+                <a href="pod-overview.html">
+            
+                    
+                    04-1.pod概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="pause-container.html">
+            
+                <a href="pause-container.html">
+            
+                    
+                    04-2.pause容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="pod-lifecycle.html">
+            
+                <a href="pod-lifecycle.html">
+            
+                    
+                    04-3.pod生命周期管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="pod-probe.html">
+            
+                <a href="pod-probe.html">
+            
+                    
+                    04-4.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="pod-hook.html">
+            
+                <a href="pod-hook.html">
+            
+                    
+                    04-5.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >04-2.pause容器</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="pause&#x5BB9;&#x5668;">Pause&#x5BB9;&#x5668;</h1>
+<p>Pause&#x5BB9;&#x5668;&#xFF0C;&#x53C8;&#x53EB;Infra&#x5BB9;&#x5668;&#xFF0C;&#x672C;&#x6587;&#x5C06;&#x63A2;&#x7A76;&#x8BE5;&#x5BB9;&#x5668;&#x7684;&#x4F5C;&#x7528;&#x4E0E;&#x539F;&#x7406;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x5728;kubelet&#x7684;&#x914D;&#x7F6E;&#x4E2D;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-bash">KUBELET_POD_INFRA_CONTAINER=--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x662F;openshift&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;kubernetes&#x4E2D;&#x9ED8;&#x8BA4;&#x7684;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-bash">KUBELET_POD_INFRA_CONTAINER=--pod-infra-container-image=gcr.io/google_containers/pause-amd64:3.0
+</code></pre>
+<p>Pause&#x5BB9;&#x5668;&#xFF0C;&#x662F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x6765;&#x5B9A;&#x4E49;&#xFF0C;&#x5B98;&#x65B9;&#x4F7F;&#x7528;&#x7684;<code>gcr.io/google_containers/pause-amd64:3.0</code>&#x5BB9;&#x5668;&#x7684;&#x4EE3;&#x7801;&#x89C1;<a href="https://github.com/kubernetes/kubernetes/tree/master/build/pause" target="_blank">Github</a>&#xFF0C;&#x4F7F;&#x7528;C&#x8BED;&#x8A00;&#x7F16;&#x5199;&#x3002;</p>
+<h2 id="pause&#x5BB9;&#x5668;&#x7684;&#x4F5C;&#x7528;">Pause&#x5BB9;&#x5668;&#x7684;&#x4F5C;&#x7528;</h2>
+<p>&#x6211;&#x4EEC;&#x68C0;&#x67E5;node&#x8282;&#x70B9;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x53D1;&#x73B0;&#x6BCF;&#x4E2A;node&#x4E0A;&#x90FD;&#x8FD0;&#x884C;&#x4E86;&#x5F88;&#x591A;&#x7684;pause&#x5BB9;&#x5668;&#xFF0C;&#x4F8B;&#x5982;&#x5982;&#x4E0B;&#x3002;</p>
+<pre><code class="lang-bash">$ docker ps
+0e031f9223<span class="hljs-built_in">cd</span>        registry.access.redhat.com/rhel7/pod-infrastructure:latest   <span class="hljs-string">&quot;/usr/bin/pod&quot;</span>           6 days ago          Up 6 days                                              k8s_POD_nginx-75d67854df-b45mp_default_11a0<span class="hljs-built_in">fc</span>72-4868-11e9-873e-000c29a5444f_0
+4b8cea8571be        2d1e5208483c                                                 <span class="hljs-string">&quot;httpd-foreground&quot;</span>       6 days ago          Up 6 days                                              k8s_httpod_httpod_default_ea43bf9a-47f3-11e9-873e-000c29a5444f_0
+ea848b2fb675        registry.access.redhat.com/rhel7/pod-infrastructure:latest   <span class="hljs-string">&quot;/usr/bin/pod&quot;</span>           6 days ago          Up 6 days                                              k8s_POD_httpod_default_ea43bf9a-47f3-11e9-873e-000c29a5444f_0
+e2e96aec0af9        httpd                                                        <span class="hljs-string">&quot;httpd-foreground&quot;</span>       6 days ago          Up 6 days                                              k8s_httpd_httpd-7db5849b8-9bhxv_default_3f40e762-47f3-11e9-873e-000c29a5444f_0
+2c1964b6a062        registry.access.redhat.com/rhel7/pod-infrastructure:latest   <span class="hljs-string">&quot;/usr/bin/pod&quot;</span>           6 days ago          Up 6 days                                              k8s_POD_httpd-7db5849b8-9bhxv_default_3f40e762-47f3-11e9-873e-000c29a5444f_0
+</code></pre>
+<p>kubernetes&#x4E2D;&#x7684;pause&#x5BB9;&#x5668;&#x4E3B;&#x8981;&#x4E3A;&#x6BCF;&#x4E2A;&#x4E1A;&#x52A1;&#x5BB9;&#x5668;&#x63D0;&#x4F9B;&#x4EE5;&#x4E0B;&#x529F;&#x80FD;&#xFF1A;</p>
+<ul>
+<li>&#x5728;pod&#x4E2D;&#x62C5;&#x4EFB;Linux&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x5171;&#x4EAB;&#x7684;&#x57FA;&#x7840;&#xFF1B;</li>
+<li>&#x542F;&#x7528;pid&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x5F00;&#x542F;init&#x8FDB;&#x7A0B;&#x3002;</li>
+</ul>
+<p>&#x5728;<a href="https://www.ianlewis.org/en/almighty-pause-container" target="_blank">The Almighty Pause Container</a>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x505A;&#x51FA;&#x4E86;&#x8BE6;&#x7EC6;&#x7684;&#x8BF4;&#x660E;&#xFF0C;pause&#x5BB9;&#x5668;&#x7684;&#x4F5C;&#x7528;&#x53EF;&#x4EE5;&#x4ECE;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#x770B;&#x51FA;&#xFF0C;&#x9996;&#x5148;&#x89C1;&#x4E0B;&#x56FE;&#xFF1A;</p>
+<p><img src="../images/pause-container.png" alt="Pause&#x5BB9;&#x5668;"></p>
+<p>&#x6211;&#x4EEC;&#x9996;&#x5148;&#x5728;&#x8282;&#x70B9;&#x4E0A;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;pause&#x5BB9;&#x5668;&#x3002;</p>
+<pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> --name pause -p 8880:80 registry.access.redhat.com/rhel7/pod-infrastructure:latest
+</code></pre>
+<p>&#x7136;&#x540E;&#x518D;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;nginx&#x5BB9;&#x5668;&#xFF0C;nginx&#x5C06;&#x4E3A;<code>localhost:2368</code>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4EE3;&#x7406;&#x3002;</p>
+<pre><code class="lang-bash">$ cat &lt;&lt;EOF &gt;&gt; nginx.conf
+error_<span class="hljs-built_in">log</span> stderr;
+events { worker_connections  1024; }
+http {
+    access_<span class="hljs-built_in">log</span> /dev/stdout combined;
+    server {
+        listen 80 default_server;
+        server_name example.com www.example.com;
+        location / {
+            proxy_pass http://127.0.0.1:2368;
+            proxy_<span class="hljs-built_in">set</span>_header  Host <span class="hljs-variable">$host</span>;
+        }
+    }
+}
+EOF
+$ docker run <span class="hljs-_">-d</span> --name nginx -v `<span class="hljs-built_in">pwd</span>`/nginx.conf:/etc/nginx/nginx.conf --net=container:pause --ipc=container:pause --pid=container:pause nginx
+</code></pre>
+<p>&#x7136;&#x540E;&#x518D;&#x4E3A;<a href="https://github.com/TryGhost/Ghost" target="_blank">ghost</a>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x6B3E;&#x535A;&#x5BA2;&#x8F6F;&#x4EF6;&#x3002;</p>
+<pre><code class="lang-bash">$ docker run <span class="hljs-_">-d</span> --name ghost --net=container:pause --ipc=container:pause --pid=container:pause ghost
+</code></pre>
+<p>&#x73B0;&#x5728;&#x8BBF;&#x95EE;<a href="http://localhost:8880/" target="_blank">http://localhost:8880/</a>&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;ghost&#x535A;&#x5BA2;&#x7684;&#x754C;&#x9762;&#x4E86;&#x3002;</p>
+<p><strong>&#x89E3;&#x6790;</strong></p>
+<p>pause&#x5BB9;&#x5668;&#x5C06;&#x5185;&#x90E8;&#x7684;80&#x7AEF;&#x53E3;&#x6620;&#x5C04;&#x5230;&#x5BBF;&#x4E3B;&#x673A;&#x7684;8880&#x7AEF;&#x53E3;&#xFF0C;pause&#x5BB9;&#x5668;&#x5728;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x8BBE;&#x7F6E;&#x597D;&#x4E86;&#x7F51;&#x7EDC;namespace&#x540E;&#xFF0C;nginx&#x5BB9;&#x5668;&#x52A0;&#x5165;&#x5230;&#x8BE5;&#x7F51;&#x7EDC;namespace&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x5230;nginx&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x6307;&#x5B9A;&#x4E86;<code>--net=container:pause</code>&#xFF0C;ghost&#x5BB9;&#x5668;&#x540C;&#x6837;&#x52A0;&#x5165;&#x5230;&#x4E86;&#x8BE5;&#x7F51;&#x7EDC;namespace&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x4E09;&#x4E2A;&#x5BB9;&#x5668;&#x5C31;&#x5171;&#x4EAB;&#x4E86;&#x7F51;&#x7EDC;&#xFF0C;&#x4E92;&#x76F8;&#x4E4B;&#x95F4;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>localhost</code>&#x76F4;&#x63A5;&#x901A;&#x4FE1;&#xFF0C;<code>--ipc=contianer:pause --pid=container:pause</code>&#x5C31;&#x662F;&#x4E09;&#x4E2A;&#x5BB9;&#x5668;&#x5904;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;namespace&#x4E2D;&#xFF0C;init&#x8FDB;&#x7A0B;&#x4E3A;<code>pause</code>&#xFF0C;&#x8FD9;&#x65F6;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x5230;ghost&#x5BB9;&#x5668;&#x4E2D;&#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x60C5;&#x51B5;&#x3002;</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># apt-get update &amp;&amp; apt-get install -y procps</span>
+<span class="hljs-comment"># ps aux</span>
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   1024     4 ?        Ss   13:49   0:00 /pause
+root         5  0.0  0.1  32432  5736 ?        Ss   13:51   0:00 nginx: master p
+systemd+     9  0.0  0.0  32980  3304 ?        S    13:51   0:00 nginx: worker p
+node        10  0.3  2.0 1254200 83788 ?       Ssl  13:53   0:03 node current/<span class="hljs-keyword">in</span>
+root        79  0.1  0.0   4336   812 pts/0    Ss   14:09   0:00 sh
+root        87  0.0  0.0  17500  2080 pts/0    R+   14:10   0:00 ps aux
+</code></pre>
+<p>&#x5728;ghost&#x5BB9;&#x5668;&#x4E2D;&#x540C;&#x65F6;&#x53EF;&#x4EE5;&#x770B;&#x5230;pause&#x548C;nginx&#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;pause&#x5BB9;&#x5668;&#x7684;PID&#x662F;1&#x3002;&#x800C;&#x5728;kubernetes&#x4E2D;&#x5BB9;&#x5668;&#x7684;PID=1&#x7684;&#x8FDB;&#x7A0B;&#x5373;&#x4E3A;&#x5BB9;&#x5668;&#x672C;&#x8EAB;&#x7684;&#x4E1A;&#x52A1;&#x8FDB;&#x7A0B;&#x3002;</p>
+<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
+<ul>
+<li><a href="https://www.ianlewis.org/en/almighty-pause-container" target="_blank">The Almighty Pause Container</a></li>
+<li><a href="https://o-my-chenjian.com/2017/10/17/The-Pause-Container-Of-Kubernetes/" target="_blank">Kubernetes&#x4E4B;Pause&#x5BB9;&#x5668;</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="pod-overview.html" class="navigation navigation-prev " aria-label="Previous page: 04-1.pod概览">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="pod-lifecycle.html" class="navigation navigation-next " aria-label="Next page: 04-3.pod生命周期管理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"04-2.pause容器","level":"1.5.2","depth":2,"next":{"title":"04-3.pod生命周期管理","level":"1.5.3","depth":2,"path":"concept/pod-lifecycle.md","ref":"concept/pod-lifecycle.md","articles":[]},"previous":{"title":"04-1.pod概览","level":"1.5.1","depth":2,"path":"concept/pod-overview.md","ref":"concept/pod-overview.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["search","-sharing","theme-default","lunr","fontsettings","livereload","highlight","livereload"],"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"concept/pause-container.md","mtime":"2019-03-23T13:53:23.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-24T00:30:04.438Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+
+    </body>
+</html>
+

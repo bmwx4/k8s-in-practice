@@ -1,0 +1,376 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>04-5.pod-hook · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="pod-probe.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="design.html">
+            
+                <a href="design.html">
+            
+                    
+                    01-1.Kubernetes 设计原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="object.html">
+            
+                <a href="object.html">
+            
+                    
+                    02-1.Kubernetes 对象介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="kubectl.html">
+            
+                <a href="kubectl.html">
+            
+                    
+                    03-1.kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="pod-state-and-lifecycle.html">
+            
+                <a href="pod-state-and-lifecycle.html">
+            
+                    
+                    04.pod状态与生命周期管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="pod-overview.html">
+            
+                <a href="pod-overview.html">
+            
+                    
+                    04-1.pod概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="pause-container.html">
+            
+                <a href="pause-container.html">
+            
+                    
+                    04-2.pause容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="pod-lifecycle.html">
+            
+                <a href="pod-lifecycle.html">
+            
+                    
+                    04-3.pod生命周期管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="pod-probe.html">
+            
+                <a href="pod-probe.html">
+            
+                    
+                    04-4.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.5" data-path="pod-hook.html">
+            
+                <a href="pod-hook.html">
+            
+                    
+                    04-5.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >04-5.pod-hook</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="pod-hook">Pod HOOK</h1>
+<h2 id="pod-hook-&#x7ED9;&#x5BB9;&#x5668;&#x751F;&#x547D;&#x5468;&#x671F;&#x8BBE;&#x7F6E;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;">Pod HOOK &#x7ED9;&#x5BB9;&#x5668;&#x751F;&#x547D;&#x5468;&#x671F;&#x8BBE;&#x7F6E;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;</h2>
+<p>Kubernetes&#x652F;&#x6301;&#x9884;&#x542F;&#x52A8;&#x548C;&#x9884;&#x7ED3;&#x675F;&#x4E8B;&#x4EF6;&#x3002; Kubernetes&#x5728;&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x53D1;&#x9001;&#x9884;&#x542F;&#x52A8;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;&#x5BB9;&#x5668;&#x7ED3;&#x675F;&#x7684;&#x65F6;&#x5019;&#x53D1;&#x9001;&#x9884;&#x7ED3;&#x675F;&#x4E8B;&#x4EF6;&#x3002;</p>
+<h3 id="&#x5B9A;&#x4E49;&#x9884;&#x542F;&#x52A8;&#x548C;&#x9884;&#x7ED3;&#x675F;&#x4E8B;&#x4EF6;&#x64CD;&#x4F5C;">&#x5B9A;&#x4E49;&#x9884;&#x542F;&#x52A8;&#x548C;&#x9884;&#x7ED3;&#x675F;&#x4E8B;&#x4EF6;&#x64CD;&#x4F5C;</h3>
+<p>&#x4E0B;&#x9762;&#x662F;Pod&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> lifecycle-demo
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> lifecycle-demo-container
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">    lifecycle:</span>
+<span class="hljs-attr">      postStart:</span>
+<span class="hljs-attr">        exec:</span>
+<span class="hljs-attr">          command:</span> [<span class="hljs-string">&quot;/bin/sh&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>, <span class="hljs-string">&quot;echo Hello from the postStart handler &gt; /usr/share/message&quot;</span>]
+<span class="hljs-attr">      preStop:</span>
+<span class="hljs-attr">        exec:</span>
+<span class="hljs-attr">          command:</span> [<span class="hljs-string">&quot;/usr/sbin/nginx&quot;</span>,<span class="hljs-string">&quot;-s&quot;</span>,<span class="hljs-string">&quot;quit&quot;</span>]
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;postStart&#x547D;&#x4EE4;&#x5728;&#x5BB9;&#x5668;&#x76EE;&#x5F55;/usr/share&#x4E0B;&#x5199;&#x4E86;&#x4E00;&#x4E2A;message&#x6587;&#x4EF6;&#xFF0C; preStop&#x547D;&#x4EE4;&#x505C;&#x6B62;&#x5BB9;&#x5668;&#x3002;&#x8FD9;&#x5728;&#x5BB9;&#x5668;&#x88AB;&#x56E0;&#x9519;&#x8BEF;&#x800C;&#x7ED3;&#x675F;&#x65F6;&#x5F88;&#x6709;&#x5E2E;&#x52A9;&#x3002;</p>
+<p>&#x9A8C;&#x8BC1; Pod:</p>
+<pre><code class="lang-bash">$ kubectl create <span class="hljs-_">-f</span> ../yamls/lifecycle-events.yaml
+$ kubectl get pod lifecycle-demo
+$ kubectl <span class="hljs-built_in">exec</span> -it lifecycle-demo -- /bin/bash
+&#x5728;shell&#x91CC;&#xFF0C;&#x9A8C;&#x8BC1;postStart&#x662F;&#x5426;&#x521B;&#x5EFA;&#x4E86;message&#x6587;&#x4EF6;&#xFF1A;
+root@lifecycle-demo:/<span class="hljs-comment"># cat /usr/share/message</span>
+</code></pre>
+<p>postStart/postSop &#x652F;&#x6301;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;HOOK&#xFF1A;</p>
+<ol>
+<li>exec&#xFF1A;&#x6267;&#x884C;&#x4E00;&#x6BB5;&#x547D;&#x4EE4;</li>
+<li>HTTP&#xFF1A;&#x53D1;&#x9001;HTTP&#x8BF7;&#x6C42;&#x3002;</li>
+</ol>
+<h3 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h3>
+<p>Kubernetes&#x5728;&#x5BB9;&#x5668;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x5C31;&#x4F1A;&#x9A6C;&#x4E0A;&#x53D1;&#x9001;postStart&#x4E8B;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x6CA1;&#x6CD5;&#x4FDD;&#x8BC1;&#x4E00;&#x5B9A;&#x4F1A; &#x8FD9;&#x4E48;&#x505A;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x5BB9;&#x5668;&#x5165;&#x53E3;&#x88AB;&#x8C03;&#x7528;&#x4E4B;&#x524D;&#x8C03;&#x7528;postStart&#x64CD;&#x4F5C;&#xFF0C;&#x56E0;&#x4E3A;postStart&#x7684;&#x64CD;&#x4F5C;&#x8DDF;&#x5BB9;&#x5668;&#x7684;&#x64CD;&#x4F5C;&#x662F;&#x5F02;&#x6B65;&#x7684;&#xFF0C;&#x800C;&#x4E14;Kubernetes&#x63A7;&#x5236;&#x53F0;&#x4F1A;&#x9501;&#x4F4F;&#x5BB9;&#x5668;&#x76F4;&#x81F3;postStart&#x5B8C;&#x6210;&#xFF0C;&#x56E0;&#x6B64;&#x5BB9;&#x5668;&#x53EA;&#x6709;&#x5728; postStart &#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x624D;&#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x6210;&#x4E3A;RUNNING&#x72B6;&#x6001;&#x3002;</p>
+<p>Kubernetes&#x5728;&#x5BB9;&#x5668;&#x7ED3;&#x675F;&#x4E4B;&#x524D;&#x53D1;&#x9001;preStop&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x4F1A;&#x5728;preStop&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x9501;&#x4F4F;&#x5BB9;&#x5668;&#x72B6;&#x6001;&#xFF0C;&#x9664;&#x975E;Pod&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x8FC7;&#x671F;&#x4E86;&#x3002;</p>
+<h3 id="&#x601D;&#x8003;">&#x601D;&#x8003;</h3>
+<p>postStart &#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5E94;&#x7528;&#x4E8E;&#x7ED9;&#x4E1A;&#x52A1;&#x5BB9;&#x5668;&#x6DFB;&#x52A0;Mysql&#xFF0C;Redis&#x767D;&#x540D;&#x5355;&#x673A;&#x5236;&#xFF1F;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="pod-probe.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 04-4.pod-hook">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"04-5.pod-hook","level":"1.5.5","depth":2,"previous":{"title":"04-4.pod-hook","level":"1.5.4","depth":2,"path":"concept/pod-probe.md","ref":"concept/pod-probe.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["search","-sharing","theme-default","lunr","fontsettings","livereload","highlight","livereload"],"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"concept/pod-hook.md","mtime":"2019-03-23T14:42:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-24T00:30:04.438Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,9 +1,9 @@
 # Init 容器
-Init 容器的基本概念，这是一种专用的容器，在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。
+Init 容器的基本概念，这是一种专用的容器，在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本,或者用于等待一些必须完成的初始化动作。
 
 ## 理解 Init 容器
 
-[Pod](https://kubernetes.io/docs/concepts/abstractions/pod/) 能够具有多个容器，应用运行在容器里面，但是它也可能有一个或多个先于应用容器启动的 Init 容器。
+[Pod](https://kubernetes.io/docs/concepts/abstractions/pod/) 能够具有多个容器，应用运行在容器里面，但是pod也可以有一个或多个先于应用容器启动的 Init 容器。
 
 Init 容器与普通的容器非常像，除了如下两点：
 
@@ -14,38 +14,23 @@ Init 容器与普通的容器非常像，除了如下两点：
 
 指定容器为 Init 容器，在 PodSpec 中添加 `initContainers` 字段，以 v1.Container 类型对象的 JSON 数组的形式，还有 app 的 `containers` 数组。 Init 容器的状态在 `status.initContainerStatuses` 字段中以容器状态数组的格式返回（类似 `status.containerStatuses` 字段）。
 
-### 与普通容器的不同之处
-
-Init 容器支持应用容器的全部字段和特性，包括资源限制、数据卷和安全设置。 然而，Init 容器对资源请求和限制的处理稍有不同，在下面 [资源](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#resources) 处有说明。 而且 Init 容器不支持 Readiness Probe，因为它们必须在 Pod 就绪之前运行完成。
-
-如果为一个 Pod 指定了多个 Init 容器，那些容器会按顺序一次运行一个。只有当前面的 Init 容器必须运行成功后，才可以运行下一个 Init 容器。当所有的 Init 容器运行完成后，Kubernetes 才初始化 Pod 和运行应用容器。
-
-## Init 容器能做什么？
-
-因为 Init 容器具有与应用程序容器分离的单独镜像，所以它们的启动相关代码具有如下优势：
-
-- 它们可以包含并运行实用工具，但是出于安全考虑，是不建议在应用程序容器镜像中包含这些实用工具的。
-- 它们可以包含使用工具和定制化代码来安装，但是不能出现在应用程序镜像中。例如，创建镜像没必要 `FROM` 另一个镜像，只需要在安装过程中使用类似 `sed`、 `awk`、 `python` 或 `dig` 这样的工具。
-- 应用程序镜像可以分离出创建和部署的角色，而没有必要联合它们构建一个单独的镜像。
-- Init 容器使用 Linux Namespace，所以相对应用程序容器来说具有不同的文件系统视图。因此，它们能够具有访问 Secret 的权限，而应用程序容器则不能。
-- 它们必须在应用程序容器启动之前运行完成，而应用程序容器是并行运行的，所以 Init 容器能够提供了一种简单的阻塞或延迟应用容器的启动的方法，直到满足了一组先决条件。
-
 ### 示例
 
 下面列举了 Init 容器的一些用途：
-- 等待一个 Service 创建完成，通过类似如下 shell 命令：
+1. 等待一个 Service 创建完成，通过类似如下 shell 命令：
 ```bash
-$  for i in {1..100}; do sleep 1; if dig myservice; then exit 0; fi; exit 1
+$  for i in {1..100}; do sleep 1; if ping 192.168.10.232; then exit 0; fi; exit 1
 ```
 
-- 将 Pod 注册到远程服务器，通过在命令中调用 API，类似如下：
+2. 将 Pod 注册到白名单服务器，通过在命令中调用 API，类似如下：
 ```bash
   curl -X POST http://$MANAGEMENT_SERVICE_HOST:$MANAGEMENT_SERVICE_PORT/register -d 'instance=$(<POD_NAME>)&ip=$(<POD_IP>)'
 ```
-- 在启动应用容器之前等一段时间，使用类似 `sleep 60` 的命令。
-- 克隆 Git 仓库到数据卷。
-- 将配置值放到配置文件中，运行模板工具为主应用容器动态地生成配置文件。例如，在配置文件中存放 POD_IP 值，并使用 Jinja 生成主应用配置文件。
-- 等待白名单生效。
+
+3. 在启动应用容器之前等一段时间，使用类似 `sleep 60` 的命令。
+4. 克隆 Git 仓库到数据卷。
+5. 将配置值放到配置文件中，运行模板工具为主应用容器动态地生成配置文件。例如，在配置文件中存放 POD_IP 值，并使用 Jinja 生成主应用配置文件。
+
 更多详细用法示例，可以在 [StatefulSet 文档](https://kubernetes.io/docs/concepts/abstractions/controllers/statefulsets/) 和 [生产环境 Pod 指南](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 中找到。
 
 ### 使用 Init 容器
@@ -70,6 +55,13 @@ spec:
     image: busybox
     command: ['sh', '-c', 'until nslookup mydb; do echo waiting for mydb; sleep 2; done;']
 ```
+
+## 总结
+
+Init 容器支持应用容器的全部字段和特性，包括资源限制、数据卷和安全设置。 然而，Init 容器对资源请求和限制的处理稍有不同，在下面 [资源](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#resources) 处有说明。 而且 Init 容器不支持 Readiness Probe，因为它们必须在 Pod 就绪之前运行完成。
+
+如果为一个 Pod 指定了多个 Init 容器，那些容器会按顺序一次运行一个。只有当前面的 Init 容器必须运行成功后，才可以运行下一个 Init 容器。当所有的 Init 容器运行完成后，Kubernetes 才初始化 Pod 和运行应用容器。
+
 
 下面的 YAML 文件展示了 `mydb` 和 `myservice` 两个 Service：
 

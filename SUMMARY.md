@@ -7,5 +7,6 @@
     1. [04-1.pod概览](concept/pod-overview.md)
     1. [04-2.pause容器](concept/pause-container.md)
     1. [04-3.pod生命周期管理](concept/pod-lifecycle.md)
-    1. [04-4.pod-hook](concept/pod-probe.md)
+    1. [04-4.pod-probe](concept/pod-probe.md)
     1. [04-5.pod-hook](concept/pod-hook.md)
+    1. [04-5.init-container](concept/init-container.md)

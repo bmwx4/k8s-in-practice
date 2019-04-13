@@ -20,3 +20,12 @@
     1. [05-5.pod-cpu-mem-quota](resource-quotas/pod-cpu-mem-quota.md)
     1. [05-6.pod-count-quota](resource-quotas/pod-count-quota.md)
     2. [05-7.pod-custom-resource](resource-quota/pod-custom-resources.md)
+
+1. [06.workload](workload/workload.md)
+    1. [06-1.replicacontroller](workload/replicacontroller.md)
+    1. [06-2.replicaset](workload/replicaset.md)
+
+1. [07.service](service/service.md)
+    1. [07-1.introduction](service/introduction.md)
+    1. [07-3.expose](service/service-type.md)
+    1. [07-4.ingress](service/ingress.md)

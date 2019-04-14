@@ -41,6 +41,7 @@ spec:
       containers:
       - name: kubia
         image: luksa/kubia
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
 ```

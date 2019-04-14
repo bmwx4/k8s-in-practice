@@ -3,7 +3,9 @@
 
 首先上报宿主机 node 的磁盘可用资源，如下是 2.7t:
 ```bash
-# disk.sh
+//为了测试，先启动apiserver的代理
+# kubectl proxy  
+# cat disk.sh
 #!/bin/bash
 curl -XPATCH http://127.0.0.1:8001/api/v1/nodes/$1/status -H "Accept: application/json" -H "Content-Type: application/json-patch+json"  -d '
 [
@@ -47,7 +49,7 @@ spec:
   containers:
   - name: volume2
     image: nginx
-  resources:
+    resources:
       limits:
         cpu: "2"
         reboot.kubernetes.com/volume: 2700

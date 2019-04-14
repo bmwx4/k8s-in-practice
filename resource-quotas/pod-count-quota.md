@@ -43,6 +43,9 @@ spec:
         image: nginx
 ```
 
+#查看命令
+kubectl describe deployments -n quota-pod-example
+
 还可以限制哪些API Object 呢？
 
 ```yaml

@@ -25,7 +25,16 @@ Ingress Controller 通过与 Kubernetes API 交互，动态的去感知集群中
 部署 Ingress Controller，拉镜像有点耗时：
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+指定版本安装：
+wget  https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.20.0/deploy/mandatory.yaml
 ```
+镜像下载失败:
+```bash
+ docker pull registry.cn-qingdao.aliyuncs.com/kubernetes_xingej/nginx-ingress-controller:0.20.0
+ docker pull registry.cn-qingdao.aliyuncs.com/kubernetes_xingej/defaultbackend-amd64:1.5
+ 然后替换镜像地址即可
+```
+
 创建 Ingress controller 的service, 不配置的话Ingress Controller 无法被访问:
 - ingress-control 使用nodePort 方式暴漏服务
 - ingress-control 使用hostNetwork 方式暴漏服务  
@@ -37,21 +46,26 @@ template:
     spec:
       hostNetwork: true
 ```
+
 或者创建个service：
 ```yaml
+#ingress-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
-  name: nginx-ingress-controller-1
+  name: nginx-ingress-controller
   namespace: ingress-nginx
 spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 80
+    nodePort: 30000
+  - port: 18080
+      nodePort: 32000
+      name: http-mgmt
   selector:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
@@ -469,8 +483,51 @@ MySQL [(none)]>exit
 [root@localhost ~]# docker restart mysql(或CONTAINER ID 1663792fad63)
 ```
 
+#### 监控
+查看ingress contrller 请求信息：
+```
+http://192.168.10.243:18080/nginx_status
+```
+但是只有文字，没有图形，首先检查是否开启vts:
+```bash
+kubectl get configmap nginx-configuration -n ingress-nginx -o yaml
+output:
+data:
+  enable-vts-status: "true"
+  proxy-body-size: 20m
+```
+
+检查docker配置是否开启 vts:
+```
+location /nginx_status {
+  set $proxy_upstream_name "internal";
+  vhost_traffic_status_display;
+  vhost_traffic_status_display_format json;
+  access_log off;
+  stub_status on;
+}
+```
+
+再检查nginx编译时，是否支持 vts；
+```bash
+# nm nginx |grep vhost_traffic_status
+```
+编译nginx支持 vts:
+```bash
+https://github.com/vozlt/nginx-module-vts#installation
+example:
+./configure --prefix=/somewhere --add-module=/path-to-your-module.
+```
+
 --------
 #### Ingress 相关结构体定义：
 kubernetes/vendor/k8s.io/api/extensions/v1beta1/types.go
 #### Ingress Controller github
 [ingress-nginx-github](https://github.com/kubernetes/ingress-nginx)
+
+#### Others:
+- Ingress NGINX: Kubernetes 官方维护的方案，也是本次安装使用的 Controller。
+- F5 BIG-IP Controller: F5 所开发的 Controller，它能够让管理员通过 CLI 或 API 让 Kubernetes 与 OpenShift 管理 F5 BIG-IP 设备。
+- Ingress Kong: 著名的开源 API Gateway 方案所维护的 Kubernetes Ingress Controller。
+- Traefik: 是一套开源的 HTTP 反向代理与负载均衡器，而它也支援了 Ingress。
+- Voyager: 一套以 HAProxy 为底的 Ingress Controller。

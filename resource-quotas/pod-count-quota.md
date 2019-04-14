@@ -18,7 +18,7 @@ spec:
 ```
 创建并查看结果：
 ```bash
-kubectl create -f quota-pod.yaml
+kubectl create -f quota-pod.yaml --namespace=quota-pod-example
 kubectl get resourcequota pod-demo --namespace=quota-pod-example --output=yaml
 ```
 下面创建一个 Deployment对象，副本数为3,用来触发podCount限制：

@@ -45,7 +45,7 @@ spec:
       containers:
       - name: pod-quota-demo
         image: nginx
-	imagePullPolicy: IfNotPresent
+		imagePullPolicy: IfNotPresent
 EOF	
 ```
 ```bash

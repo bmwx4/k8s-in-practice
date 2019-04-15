@@ -47,7 +47,7 @@ kubectl create namespace quota-mem-cpu-example
 
 创建 ResourceQuota 对象
 ```yaml
-# mem-cpu-demo.yaml
+cat << EOF >  mem-cpu-demo.yaml
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -58,6 +58,7 @@ spec:
     requests.memory: 1Gi
     limits.cpu: "2"
     limits.memory: 2Gi
+EOF    
 ```
 创建并验证 ResourceQuota 对象
 ```bash
@@ -67,7 +68,7 @@ $ kubectl create -f mem-cpu-demo.yaml --namespace=quota-mem-cpu-example
 
 创建一个符合quota限制的pod
 ```yaml
-#quota-mem-cpu-demo.yaml
+cat << EOF > quota-mem-cpu-demo.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -83,7 +84,7 @@ spec:
       requests:
         memory: "600Mi"
         cpu: "400m"
-
+EOF
 ```
 创建并验证：
 ```bash
@@ -107,7 +108,7 @@ status:
 
 再创建第二个pod，尝试突破 quota 限制
 ```yaml
-# quota-mem-cpu-demo-2.yam;s
+cat <<EOF > quota-mem-cpu-demo-2.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -116,6 +117,7 @@ spec:
   containers:
   - name: quota-mem-cpu-demo-2-ctr
     image: redis
+	imagePullPolicy: IfNotPresent
     resources:
       limits:
         memory: "1Gi"
@@ -123,6 +125,7 @@ spec:
       requests:
         memory: "700Mi"
         cpu: "400m"
+EOF	
 ```
 创建并验证：
 ```bash

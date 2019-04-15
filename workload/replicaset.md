@@ -22,6 +22,7 @@ spec:
       containers:
       - name: kubia
         image: luksa/kubia
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
 ```
@@ -55,6 +56,7 @@ spec:
       containers:
       - name: kubia
         image: luksa/kubia
+        imagePullPolicy: IfNotPresent
 ```
 可以给选择器增加多个表达式，每个表达式都必须包含一个key，一个 operator，但是可能包含多个 values，或者没有 values，取决于operator的值；比如：
 ```

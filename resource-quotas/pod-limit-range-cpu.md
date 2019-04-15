@@ -7,6 +7,7 @@ $ kubectl create namespace default-cpu-example
 ```
 为pod创建一个 limitRange 对象
 ```yaml
+cat << EOF > cpu-defaults.yaml
 apiVersion: v1
 kind: LimitRange
 metadata:
@@ -18,6 +19,7 @@ spec:
     defaultRequest:
       cpu: 0.5
     type: Container
+EOF    
 ```
 创建并验证
 ```bash

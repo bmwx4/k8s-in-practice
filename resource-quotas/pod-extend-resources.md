@@ -78,3 +78,7 @@ EOF
 kubectl get pod -n pod-extend-resource -w 
 kubectl apply -f pod-extend-example02.yaml -n pod-extend-resource
 ```
+确认功能已经实现，清理演示环境空间
+```bash
+kubectl delete namespace pod-extend-resource
+```

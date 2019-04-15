@@ -29,3 +29,5 @@
     1. [07-1.introduction](service/introduction.md)
     1. [07-3.expose](service/service-type.md)
     1. [07-4.ingress](service/ingress.md)
+1. [Tasks](tasks/tasks.md)
+    1. [hostalias](tasks/hostalias.md)

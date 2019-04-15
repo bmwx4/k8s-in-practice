@@ -2,8 +2,13 @@
 一个Pod的资源请求量(requests)和限制量(limits) 是它所包含的所有容器的请求量以及限制量；但是在创建pod的时候，
 可以针对容器单独申请CPU和Memory的资源；
 
+创建一个测试的ns
+```bash
+kubectl create namespace pod-resource-qos
+```
 ***cpu requests***
 ```yaml
+cat << EOF > pod-resource-qos-explame.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -18,6 +23,11 @@ spec:
         cpu: 200m
         memory: "10Mi"
     command: ["dd","if=/dev/zero","of=/dev/null"]
+EOF
+```
+运行pod并验证
+```bash
+kubectl apply -f pod-resource-qos.yaml -n pod-resource-qos
 ```
 在pod manifest 中，我们为主容器申请了200毫核(即一个CPU时间的1/5)的CPU， 10M 的Memory。requests的意义，如果对于
 容器来说，我们可以理解成是保底使用资源，对于调度器来说，在调度的时候，具备这些 requests 资源的node才满足调度需求。但是
@@ -29,14 +39,16 @@ spec:
 比如，我们创建三个pod，需要在一个node上测试，所以要保证三个pod调度到同一台宿主上：
 首先要解决如何调度pod到同一台宿主：
 ```yaml
+# 这里通过节点选择器 nodeSelector 的策略，实现生成的pod 调度到 同一台宿主上
 spec:
   nodeSelector:
-    kubernetes.io/hostname: 192.168.10.242
+    kubernetes.io/hostname: 192.168.10.243
 ```
 使用nodeSelector 初级调度策略来实现，可参考 [assign-pods-nodes]( https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/)
 
 ```yaml
-#pod-request-stress.yaml
+cat << EOF > pod-request-stress.yaml
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -53,7 +65,7 @@ spec:
         cpu: 2000m
         memory: "10Mi"
     command: ["stress","-c","4"]
-
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -70,11 +82,11 @@ spec:
         cpu: 1000m
         memory: "10Mi"
     command: ["stress","-c","4"]
-
+---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: requests-pod-1000
+  name: requests-pod-3000
 spec:
   nodeSelector:
     kubernetes.io/hostname: 192.168.10.243
@@ -86,11 +98,12 @@ spec:
       requests:
         cpu: 1000m
         memory: "10Mi"
-    command: ["stress","-c","4"]    
+    command: ["stress","-c","4"]   
+    
 ```
 创建pod：
 ```bash
-$ kubectl create -f pod-request-stress.yaml
+$ kubectl create -f pod-request-stress.yaml -n pod-resource-qos
 ```
 创建完成之后， 在宿主上执行如下命令查看各容器运行情况：
 ![pod-request-stress](../images/pod-request-stress.png)
@@ -104,6 +117,7 @@ CPU是一种可压缩资源， 意味着我们可以在不对容器内运行的�
 
 创建一个带有资源limits的pod
 ```yaml
+cat << EOF > pod-resource-limit-example02.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -119,6 +133,9 @@ spec:
         memory: "20Mi"
     command: ["dd","if=/dev/zero","of=/dev/null"]
 ```
+```bash
+$ kubectl apply -f pod-resource-limit-example02.yaml -n pod-resource-qos
+```
 这个容器内的进程不允许消耗超过200m的cpu和20m的memory。
 ***ps***
 >因为没有指定资源requestes, 它将被设置成与limits相同的值
@@ -132,6 +149,7 @@ spec:
 CPU资源是可压缩资源，当进程不等待IO操作耗时所有的CPU时间是很常见的， 对一个进程的CPU使用率可以限制，因此当为一个容器设置CPU限制时， 该进程只会分不到比限额更多的CPU而已。  
 而内存却有所不同，当进程尝试申请更多的内存资源时(突破限制)会被杀掉。或者说这个进程被OOMKilled了，OOM（Out Of Memory的缩写）。如果pod的重启策略是Always或者OnFailure，进程会立即重启，如果再次超限，K8S 会再次重启，但是会增加重启的间隔时间，这种情况会看到pod处于 CrashLoopBackOff状态, CrashLoopBackOff状态 说明kubelet还没有放弃，第一次重启的间隔为10s， 也就是kubelet会等待10s再重启它， 随着不断的OOM， 延迟也会增加，会按照20s，40s，80s ，160s以几何倍数增长，最终收敛到300s。一旦时间间隔达到300s，Kubelet 将以5分钟为间隔对容器进行无限制重启，直到容器正常运行或者被删除。
 ```yaml
+cat << EOF > pod-resource-limit-example03.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -148,10 +166,14 @@ spec:
         cpu: 200m
         memory: "100Mi"
     command: ["stress","--vm","1" ,"--vm-bytes", "400M"]
+EOF    
+```
+```bash
+$ kubectl apply -f pod-resource-limit-example03.yaml -n pod-resource-qos
 ```
 如何定位容器crash的原因呢？
 ```bash
-# kubectl  describe pod limit-mem-pod
+# kubectl  describe pod limit-mem-pod -n pod-resource-qos
 Command:
   stress
   --vm
@@ -174,7 +196,10 @@ Restart Count:  4
 ![pod-oversold](../images/pod-oversold.png)
 
 如果节点资源真实使用率达到100%或者上限，一些容器将被杀掉，这是一个很重的结果。但是具体怎么杀容器呢？ 需要了解一下QOS策略。
-
+请确保演示功能已经实现，清扫环境
+```bash
+$ kubectl delete namespace  pod-resource-qos
+```
 #### 参考
 https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
 https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/

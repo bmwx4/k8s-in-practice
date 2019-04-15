@@ -7,7 +7,7 @@ $ kubectl create namespace quota-pod-example
 ```
 下面是 ResourceQuota 对象信息：
 ```yaml
-# quota-pod.yaml
+cat << EOF >  quota-pod.yaml
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -15,15 +15,19 @@ metadata:
 spec:
   hard:
     pods: "2"
+EOF
+
 ```
 创建并查看结果：
 ```bash
-kubectl create -f quota-pod.yaml
+kubectl create -f quota-pod.yaml --namespace=quota-pod-example
 kubectl get resourcequota pod-demo --namespace=quota-pod-example --output=yaml
+# ResourceQuota 的作用对象是在 命名空间级( namespace )
+#   --namespace 参数是指定该属性作用于那个命名空间。默认是 default 空间。
 ```
 下面创建一个 Deployment对象，副本数为3,用来触发podCount限制：
 ```yaml
-# quota-pod-deployment.yaml
+cat  <<EOF >  quota-pod-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,6 +45,16 @@ spec:
       containers:
       - name: pod-quota-demo
         image: nginx
+		imagePullPolicy: IfNotPresent
+EOF	
+```
+```bash
+kubectl apply -f quota-pod-deployment.yaml --namespace=quota-pod-example
+# 查看命名空间为 quota-pod-example 下的 pod 状态
+kubectl get pod -n quota-pod-example -w 
+# 退出watch 状态，按住 ctrl + C 
+# 查看该资源对象的状态
+kubectl describe -f quota-pod-deployment.yaml
 ```
 
 #查看命令
@@ -130,6 +144,7 @@ Terminating 与 NotTerminating 相对，因为用户可以在pod spec中配置 a
 
 比如:
 ```yaml
+
 apiVersion: v1
 kind: ResourceQuota
 metadata:

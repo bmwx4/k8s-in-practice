@@ -33,10 +33,10 @@ spec:
 kubectl create -f ssd-monitor-daemonset.yaml
 # kubectl  get ds -owide
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE   CONTAINERS   IMAGES              SELECTOR
-ssd-monitor   0         0         0       0            0           disk=ssd        10s   main         luksa/ssd-monitor   app=ssd-monitor
+ssd-monitor   0         0         0       0            0           k8s.51reboot.com/disk        10s   main         luksa/ssd-monitor   app=ssd-monitor
 ```
 此时你会发现找不到pod, DESIRED 为0， CURRENT 为0，为什么呢？
-答案是需要给宿主打 "disk=ssd" 的标签；
+答案是需要给宿主打 "k8s.51reboot.com/disk" 的标签；
 ```bash
 # kubectl  get node --show-labels
 NAME             STATUS   ROLES    AGE   VERSION        LABELS
@@ -52,10 +52,10 @@ NAME             STATUS   ROLES    AGE   VERSION        LABELS
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE     CONTAINERS   IMAGES              SELECTOR
 ssd-monitor   1         1         1       1            1           k8s.51reboot.com/disk=ssd        3m27s   main         luksa/ssd-monitor   app=ssd-monitor
 ```
-***删除节点标签***
+***删除节点标签***  
 下面把 node  192.168.10.243 的标签删除，看daemonset 的 pod是否受到影响，比如：
 ```bash
-]# kubectl label nodes 192.168.10.243 disk-
+# kubectl label nodes 192.168.10.243 k8s.51reboot.com/disk-
 node/192.168.10.243 labeled
 # kubectl  get node --show-labels         
 NAME             STATUS   ROLES    AGE   VERSION        LABELS
@@ -67,7 +67,7 @@ ssd-monitor   0         0         0       0            0           k8s.51reboot.
 ```
 pod被如期的删除了 ，如果想要删除所有daemonset的 pod，直接删除daemonset 就可以了；
 
-***思考：如果node设置为unschedule状态，daemonset的行为是什么？***
+***思考：如果node设置为unschedule状态，daemonset的行为是什么？***  
 比如我们把其中一个node设置成不可调度状态，查看其pod是否会被删除？
 先准备好当前ds的环境：
 ```
@@ -110,7 +110,7 @@ ssd-monitor-l58zr   1/1     Running   0          4s    172.30.14.7   192.168.10.
 ```
 说明 ds 的pod并没有受到 node 的不可调度状态而影响。
 
-***思考：如果把kube-scheduler 调度器停掉呢？ds是什么行为？***
+***思考：如果把kube-scheduler 调度器停掉呢？ds是什么行为？***   
 先把调度器停服:
 ```
 # systemctl stop kube-scheduler.service

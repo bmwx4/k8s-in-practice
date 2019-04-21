@@ -14,6 +14,29 @@ service 是一种资源对象，可以为一组功能相同的pod提供单一的
 创建一个名称为 kubia 的服务， 该服务将在端口80上接收请求流量，并转发到后端pod的8080端口，如何关联 pod 呢？通过 selector标签选择器；
 ```yaml
 #svc.yaml
+---
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+---          
 apiVersion: v1
 kind: Service
 metadata:
@@ -60,7 +83,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kubia
-spec: ports:
+spec: 
+  ports:
   - name: http
     port: 80
     targetPort: 8080
@@ -68,7 +92,7 @@ spec: ports:
     port: 443
     targetPort: 6443
   selector:
-app: kubia
+    app: kubia
 ```
 对应的pod配置如下：
 ```yaml
@@ -97,7 +121,7 @@ spec: ports:
     port: 443
     targetPort: https
   selector:
-app: kubia
+    app: kubia
 ```
 使用命名端口的好处什么？  
 即使pod的端口改变了，也无须更改service的spec。

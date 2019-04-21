@@ -25,7 +25,7 @@ spec:
     targetPort: 8080
     nodePort: 30123
   selector:
-app: kubia
+    app: kubia
 ```
 解释：
 ```
@@ -89,7 +89,7 @@ You\'ve hit kubia-xueq1
 
 #### 外部连接的特性
 ***网络连接跳数***  
-当外部客户端通通过NodePort连接到服务时， 将随机选择pod，并不一定选择在接收请求的节点上的pod作为后端server，这就会带来额外的网络跳数才能转发到pod，但这种行为并不是用户希望的。可以通过配置仅将外部通信重定向到接收请求的节点上运行的pod，如何设置？
+当外部客户端通过NodePort连接到服务时， 将随机选择pod，并不一定选择在接收请求的节点上的pod作为后端server，这就会带来额外的网络跳数才能转发到pod，但这种行为并不是用户希望的。可以通过配置仅将外部通信重定向到接收请求的节点上运行的pod，如何设置？
 ```yaml
 apiVersion: v1
 kind: Service

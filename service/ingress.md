@@ -428,7 +428,7 @@ spec:
 ```
 创建mysql 服务：
 ```bash
-
+kubectl apply -f mysql.yaml
 ```
 mysql ingress配置：
 ```yaml
@@ -486,7 +486,7 @@ MySQL [(none)]>exit
 #### 监控
 查看ingress contrller 请求信息：
 ```
-http://192.168.10.243:18080/nginx_status
+http://192.168.10.243:80/nginx_status
 ```
 但是只有文字，没有图形，首先检查是否开启vts:
 ```bash
@@ -498,7 +498,8 @@ data:
 ```
 
 检查docker配置是否开启 vts:
-```
+```bash
+kubectl exec -it nginx-ingress-controller-76c86d76c4-8xq5r -n ingress-nginx -- cat /etc/nginx/nginx.conf | grep vhost_traffic_status_display
 location /nginx_status {
   set $proxy_upstream_name "internal";
   vhost_traffic_status_display;

@@ -60,7 +60,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kubia
-spec: ports:
+spec:
+  ports:
   - name: http
     port: 80
     targetPort: 8080
@@ -68,7 +69,7 @@ spec: ports:
     port: 443
     targetPort: 6443
   selector:
-app: kubia
+    app: kubia
 ```
 对应的pod配置如下：
 ```yaml

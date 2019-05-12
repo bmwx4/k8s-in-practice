@@ -9,7 +9,7 @@ metadata:
   name: test-emptydir
 spec:
   containers:
-  - image: bmwx4/kugo
+  - image: bmwx4/kugo:v1.0
     imagePullPolicy: IfNotPresent
     name: container
     volumeMounts:

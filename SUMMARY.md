@@ -37,7 +37,7 @@
     1. [07-1.deployment-background](deployment/deployment-rc.md)
     1. [07-2.deployment](deployment/deployment.md)
 
-1. [09.storage](volume/volume.md)
+1. [09.volume](volume/volume.md)
     1. [07-1.emptydir](volume/emptydir.md)
     1. [07-2.hostpath](volume/hostpath.md)
     1. [07-2.nfs](volume/nfs.md)
@@ -50,4 +50,4 @@
     1. [client-go](tasks/client-go.md)
     1. [replay-example](tasks/replay-example.md)
     1. [replay-template](tasks/replay-template.md)
-    1. [k8s-complie](tasks/k8s-complie.md)
+    1. [k8s-complie](tasks/k8s-compile.md)

@@ -32,5 +32,21 @@
     1. [07-3.ingress](service/ingress.md)
     1. [07-4.svc-and-readiness-probe](service/svc-and-readiness-probe.md)
     1. [07-5.headless](service/headless.md)
+
+1. [08.deployment](deployment/deployment-rc.md)
+    1. [07-1.deployment](deployment/deployment.md)
+
+1. [09.storage](volume/volume.md)
+    1. [07-1.emptydir](volume/emptydir.md)
+    1. [07-2.hostpath](volume/hostpath.md)
+    1. [07-2.nfs](volume/nfs.md)
+    1. [07-3.ceph-rbd](volume/ceph-rbd.md)
+    1. [07-3.cephfs](volume/cephfs.md)
+    1. [07-4.dynamic](volume/dynamic.md)
+
 1. [Tasks](tasks/tasks.md)
     1. [hostalias](tasks/hostalias.md)
+    1. [client-go](tasks/client-go.md)
+    1. [replay-example](tasks/replay-example.md)
+    1. [replay-template](tasks/replay-template.md)
+    1. [k8s-complie](tasks/k8s-complie.md)

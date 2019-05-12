@@ -33,8 +33,9 @@
     1. [07-4.svc-and-readiness-probe](service/svc-and-readiness-probe.md)
     1. [07-5.headless](service/headless.md)
 
-1. [08.deployment](deployment/deployment-rc.md)
-    1. [07-1.deployment](deployment/deployment.md)
+1. [08.deployment](deployment/readme.md)
+    1. [07-1.deployment-background](deployment/deployment-rc.md)
+    1. [07-2.deployment](deployment/deployment.md)
 
 1. [09.storage](volume/volume.md)
     1. [07-1.emptydir](volume/emptydir.md)

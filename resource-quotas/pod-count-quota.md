@@ -56,6 +56,10 @@ kubectl get pod -n quota-pod-example -w
 # 查看该资源对象的状态
 kubectl describe -f quota-pod-deployment.yaml
 ```
+
+#查看命令
+kubectl describe deployments -n quota-pod-example
+
 还可以限制哪些API Object 呢？
 
 ```yaml

@@ -82,17 +82,21 @@ $ source <(kubectl completion bash)
 $ source <(kubectl completion zsh)
 ```
 kubectl写yaml太累，找样例太麻烦? 用run命令生成  
-```
+```bash
 $ kubectl run --image=nginx my-deploy -o yaml --dry-run > my-deploy.yamls
 ```
 用get命令导出yaml  
-```
+```bash
 $ kubectl get statefulset/nginx -o=yaml --export > nginx.yaml
 ```
 
 Pod亲和性下面字段的拼写忘记了  
-```
+```bash
 kubectl explain pod.spec.affinity.podAffinity
+```
+快速创建pod：
+```bash
+# kubectl  run busybox  --image=busybox --image-pull-policy=IfNotPresent --generator=run-pod/v1 --command -- sleep 1000
 ```
 
 ![kubectl](../images/kubernetes-kubectl-cheatsheet.png)

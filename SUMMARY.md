@@ -51,3 +51,5 @@
     1. [replay-example](tasks/replay-example.md)
     1. [replay-template](tasks/replay-template.md)
     1. [k8s-complie](tasks/k8s-compile.md)
+    1. [gitlab](tasks/gitlab.md)
+    1. [jenkins](tasks/jenkins.md)

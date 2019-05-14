@@ -1,0 +1,1324 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>06-1.replicacontroller · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="replicaset.html" />
+    
+    
+    <link rel="prev" href="workload.md" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../concept/design.html">
+            
+                <a href="../concept/design.html">
+            
+                    
+                    01-1.Kubernetes 设计原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/object.html">
+            
+                <a href="../concept/object.html">
+            
+                    
+                    02-1.Kubernetes 对象介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../concept/kubectl.html">
+            
+                <a href="../concept/kubectl.html">
+            
+                    
+                    03-1.kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../concept/pod-state-and-lifecycle.html">
+            
+                <a href="../concept/pod-state-and-lifecycle.html">
+            
+                    
+                    04.pod状态与生命周期管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../concept/pod-overview.html">
+            
+                <a href="../concept/pod-overview.html">
+            
+                    
+                    04-1.pod-view
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../concept/pause-container.html">
+            
+                <a href="../concept/pause-container.html">
+            
+                    
+                    04-2.pause-container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../concept/pod-lifecycle.html">
+            
+                <a href="../concept/pod-lifecycle.html">
+            
+                    
+                    04-3.pod-lifecycel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../concept/pod-probe.html">
+            
+                <a href="../concept/pod-probe.html">
+            
+                    
+                    04-4.pod-probe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../concept/pod-hook.html">
+            
+                <a href="../concept/pod-hook.html">
+            
+                    
+                    04-5.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../concept/init-containers.html">
+            
+                <a href="../concept/init-containers.html">
+            
+                    
+                    04-6.init-container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../concept/pod-preset.md">
+            
+                <span>
+            
+                    
+                    04-7.pod-preset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../resource-quotas/resource-manager.html">
+            
+                <a href="../resource-quotas/resource-manager.html">
+            
+                    
+                    05.pod计算资源管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../resource-quotas/pod-resource.html">
+            
+                <a href="../resource-quotas/pod-resource.html">
+            
+                    
+                    05-1.pod-resource
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../resource-quotas/pod-qos.html">
+            
+                <a href="../resource-quotas/pod-qos.html">
+            
+                    
+                    05-2.pod-qos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../resource-quotas/pod-limit-range-mem.html">
+            
+                <a href="../resource-quotas/pod-limit-range-mem.html">
+            
+                    
+                    05-3.pod-limit-range-mem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../resource-quotas/pod-limit-range-cpu.html">
+            
+                <a href="../resource-quotas/pod-limit-range-cpu.html">
+            
+                    
+                    05-4.pod-limit-range-cpu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../resource-quotas/pod-cpu-mem-quota.html">
+            
+                <a href="../resource-quotas/pod-cpu-mem-quota.html">
+            
+                    
+                    05-5.pod-cpu-mem-quota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../resource-quotas/pod-count-quota.html">
+            
+                <a href="../resource-quotas/pod-count-quota.html">
+            
+                    
+                    05-6.pod-count-quota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../resource-quotas/pod-extentd-resources.md">
+            
+                <span>
+            
+                    
+                    05-7.pod-extentd-resource
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="workload.md">
+            
+                <span>
+            
+                    
+                    06.workload
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.7.1" data-path="replicacontroller.html">
+            
+                <a href="replicacontroller.html">
+            
+                    
+                    06-1.replicacontroller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="replicaset.html">
+            
+                <a href="replicaset.html">
+            
+                    
+                    06-2.replicaset
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="daemonset.html">
+            
+                <a href="daemonset.html">
+            
+                    
+                    06-2.daemonset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../service/service.html">
+            
+                <a href="../service/service.html">
+            
+                    
+                    07.service
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../service/introduction.html">
+            
+                <a href="../service/introduction.html">
+            
+                    
+                    07-1.introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../service/service-type.html">
+            
+                <a href="../service/service-type.html">
+            
+                    
+                    07-2.service-type
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../service/ingress.html">
+            
+                <a href="../service/ingress.html">
+            
+                    
+                    07-3.ingress
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../service/svc-and-readiness-probe.html">
+            
+                <a href="../service/svc-and-readiness-probe.html">
+            
+                    
+                    07-4.svc-and-readiness-probe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../service/headless.html">
+            
+                <a href="../service/headless.html">
+            
+                    
+                    07-5.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../deployment/readme.md">
+            
+                <span>
+            
+                    
+                    08.deployment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../deployment/deployment-rc.html">
+            
+                <a href="../deployment/deployment-rc.html">
+            
+                    
+                    08-1.deployment-background
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../deployment/deployment.html">
+            
+                <a href="../deployment/deployment.html">
+            
+                    
+                    08-2.deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../volume/volume.md">
+            
+                <span>
+            
+                    
+                    09.volume
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../volume/emptydir.html">
+            
+                <a href="../volume/emptydir.html">
+            
+                    
+                    09-1.emptydir
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../volume/hostpath.html">
+            
+                <a href="../volume/hostpath.html">
+            
+                    
+                    09-2.hostpath
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../volume/nfs.html">
+            
+                <a href="../volume/nfs.html">
+            
+                    
+                    09-2.nfs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../volume/ceph-rbd.html">
+            
+                <a href="../volume/ceph-rbd.html">
+            
+                    
+                    09-3.ceph-rbd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../volume/cephfs.md">
+            
+                <span>
+            
+                    
+                    09-3.cephfs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../volume/dynamic.md">
+            
+                <span>
+            
+                    
+                    09-4.dynamic
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../statefulset/readme.md">
+            
+                <span>
+            
+                    
+                    10.StatefulSet
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../statefulset/sts-overview.md">
+            
+                <span>
+            
+                    
+                    10-1.sts-overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../statefulset/sts-practice.md">
+            
+                <span>
+            
+                    
+                    10-1.sts-practice
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../statefulset/sts-upgrade.md">
+            
+                <span>
+            
+                    
+                    10-2.sts-upgrade
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../scheduler/readme.md">
+            
+                <span>
+            
+                    
+                    11.Scheduler
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../scheduler/pod-affinity.md">
+            
+                <span>
+            
+                    
+                    11-1.pod-affinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../scheduler/pod-antiaffinity.md">
+            
+                <span>
+            
+                    
+                    10-2.pod-antiaffinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../scheduler/node-affinity.md">
+            
+                <span>
+            
+                    
+                    10-1.node-affinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../scheduler/taints-tolerations.md">
+            
+                <span>
+            
+                    
+                    07-2.taints-tolerations
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../security/readme.md">
+            
+                <span>
+            
+                    
+                    12.security
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../security/security-context.md">
+            
+                <span>
+            
+                    
+                    11-1.security-context
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../security/rbac.md">
+            
+                <span>
+            
+                    
+                    11-2.rbac
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../applications-config/readme.md">
+            
+                <span>
+            
+                    
+                    13.applications-config
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../applications-config/command-line-arguments.md">
+            
+                <span>
+            
+                    
+                    13-1.command-line-arguments
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../applications-config/environment.md">
+            
+                <span>
+            
+                    
+                    13-2.environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../applications-config/configmap.md">
+            
+                <span>
+            
+                    
+                    13-3.ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../applications-config/secret.md">
+            
+                <span>
+            
+                    
+                    13-4.Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.5" data-path="../applications-config/downward-api.md">
+            
+                <span>
+            
+                    
+                    13-4.downwardAPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../ops/readme.md">
+            
+                <span>
+            
+                    
+                    14.ops
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../ops/high-availability.md">
+            
+                <span>
+            
+                    
+                    13-1.high-availability
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../ops/etcd.md">
+            
+                <span>
+            
+                    
+                    13-2.etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../ops/metrics.md">
+            
+                <span>
+            
+                    
+                    13-3.metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../tasks/tasks.md">
+            
+                <span>
+            
+                    
+                    Tasks
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../tasks/hostalias.md">
+            
+                <span>
+            
+                    
+                    hostalias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../tasks/client-go.html">
+            
+                <a href="../tasks/client-go.html">
+            
+                    
+                    k8s-app-development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../tasks/replay-example.html">
+            
+                <a href="../tasks/replay-example.html">
+            
+                    
+                    replay-example
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.4" data-path="../tasks/replay-template.html">
+            
+                <a href="../tasks/replay-template.html">
+            
+                    
+                    replay-template
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.5" data-path="../tasks/k8s-compile.html">
+            
+                <a href="../tasks/k8s-compile.html">
+            
+                    
+                    k8s-custem-development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.6" data-path="../tasks/gitlab.html">
+            
+                <a href="../tasks/gitlab.html">
+            
+                    
+                    gitlab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.7" data-path="../tasks/jenkins.html">
+            
+                <a href="../tasks/jenkins.html">
+            
+                    
+                    jenkins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.8" data-path="../tasks/cicd.md">
+            
+                <span>
+            
+                    
+                    cicd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >06-1.replicacontroller</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="replicacontroller">ReplicaController</h1>
+<h3 id="&#x4E86;&#x89E3;-replicacontroller">&#x4E86;&#x89E3; ReplicaController</h3>
+<p>ReplicaController &#x662F;&#x4E00;&#x79CD;Kubernetes&#x8D44;&#x6E90;&#xFF0C;&#x4E5F;&#x53EB;&#x526F;&#x672C;&#x63A7;&#x5236;&#x5668;&#xFF0C;&#x53EF;&#x786E;&#x4FDD;&#x5B83;&#x7684;pod&#x59CB;&#x7EC8;&#x4FDD;&#x6301;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x3002;&#x5982;&#x679C;pod &#x56E0;&#x4EFB;&#x4F55;&#x539F;&#x56E0;&#x6D88;&#x5931;(&#x6BD4;&#x5982;&#x8282;&#x70B9;&#x4ECE;&#x96C6;&#x7FA4;&#x4E2D;&#x6D88;&#x5931;&#x3001;&#x8282;&#x70B9;&#x6545;&#x969C;&#x3001;&#x5185;&#x6838;bug&#x4FEE;&#x590D;&#x6216;&#x56E0;&#x8282;&#x70B9;&#x538B;&#x529B;&#x5927;&#xFF0C;&#x8BE5;pod&#x88AB;&#x9A71;&#x9010;&#x7B49;&#x539F;&#x56E0;)&#xFF0C;&#x5219; ReplicaController &#x4F1A;&#x76D1;&#x6D4B;&#x5230;&#x7F3A;&#x5C11;&#x4E86;pod&#xFF0C;&#x5E76;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;pod&#x66FF;&#x4EE3;&#xFF0C;&#x4FDD;&#x8BC1;&#x6570;&#x91CF;&#x4E0A;&#x6EE1;&#x8DB3; ReplicaController &#x4E2D;&#x7684;&#x671F;&#x671B;&#x503C;&#x3002;
+<img src="../images/rc-introduce.png" alt="rc-introduce"></p>
+<h3 id="replicacontroller-&#x64CD;&#x4F5C;">ReplicaController &#x64CD;&#x4F5C;</h3>
+<p>ReplicaController &#x4F1A;&#x6301;&#x7EED;&#x76D1;&#x63A7;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;pod&#x5217;&#x8868;&#xFF0C; &#x5E76;&#x4FDD;&#x8BC1;&#x76F8;&#x5E94;&quot;&#x7C7B;&#x578B;&quot;&#x7684;pod&#x7684;&#x6570;&#x76EE;&#x4E0E;&#x671F;&#x671B;&#x503C;&#x76F8;&#x7B26;&#x3002;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684; ReplicaController &#x7684;&#x526F;&#x672C;(pod)&#x6570;&#x592A;&#x5C11;&#xFF0C;&#x5B83;&#x4F1A;&#x6839;&#x636E;pod&#x6A21;&#x677F;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x526F;&#x672C;&#x3002;&#x76F8;&#x53CD;&#xFF0C;&#x5982;&#x679C;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;pod&#x592A;&#x591A;&#xFF0C;&#x5B83;&#x5C06;&#x5220;&#x9664;&#x591A;&#x4F59;&#x7684;pod&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x6709;&#x4EBA;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x76F8;&#x540C;&#x7C7B;&#x578B;&#x7684;pod&#xFF1B;</li>
+<li>&#x6709;&#x4EBA;&#x66F4;&#x6539;pod&#x7684;&#x7C7B;&#x578B;&#xFF1B;</li>
+<li>&#x6709;&#x4EBA;&#x51CF;&#x5C11;&#x6240;&#x9700;pod&#x7684;&#x526F;&#x672C;&#x6570;&#x91CF;&#x7B49;&#xFF1B;  </li>
+</ul>
+<p>&#x6240;&#x4EE5;&#xFF0C;ReplicaController &#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x786E;&#x4FDD;pod&#x7684;&#x6570;&#x91CF;&#x59CB;&#x7EC8;&#x4E0E;&#x5176;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x5339;&#x914D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x5339;&#x914D;&#xFF0C; &#x5219; ReplicaController&#x5C06;&#x6839;&#x636E;&#x6240;&#x9700;&#xFF0C;&#x91C7;&#x53D6;&#x9002;&#x5F53;&#x7684;&#x64CD;&#x4F5C;&#x6765;&#x534F;&#x8C03;pod&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x663E;&#x793A;&#x4E86; ReplicaController &#x7684;&#x64CD;&#x4F5C;&#x6D41;&#x7A0B;&#xFF1A;
+<img src="../images/replicationcontroller-loop.png" alt="ReplicaController Loop"></p>
+<h3 id="replicacontroller-&#x7684;&#x7EC4;&#x6210;">ReplicaController &#x7684;&#x7EC4;&#x6210;</h3>
+<p>&#x4E00;&#x4E2A;ReplicaController&#x6709;&#x4E09;&#x4E2A;&#x4E3B;&#x8981;&#x7EC4;&#x6210;&#x90E8;&#x5206;</p>
+<pre><code>label selector (&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;), &#x7528;&#x4E8E;&#x786E;&#x5B9A; ReplicaController &#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x6709;&#x54EA;&#x4E9B; pod&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x6210;pod&#x9009;&#x62E9;&#x5668;
+replica count (&#x526F;&#x672C;&#x6570;)&#xFF0C; &#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x5E94;&#x8BE5;&#x8FD0;&#x884C;&#x7684; pod &#x6570;&#x91CF;
+pod template (pod &#x6A21;&#x677F;)&#xFF0C;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x521B;&#x5EFA;&#x65B0;&#x7684; pod &#x526F;&#x672C;
+</code></pre><h3 id="replicacontroller-&#x521B;&#x5EFA;">ReplicaController &#x521B;&#x5EFA;</h3>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A; &#x526F;&#x672C;&#x6570;&#x4E3A; 3 &#x4E2A;pod&#x7684; ReplicationController&#xFF0C;&#x540D;&#x79F0;&#x662F;&#x4E3A; nginx&#x3002;</p>
+<pre><code class="lang-yaml"><span class="hljs-comment"># kubia-rc.yaml</span>
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> ReplicationController
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> kubia
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  replicas:</span> <span class="hljs-number">3</span>
+<span class="hljs-attr">  selector:</span>
+<span class="hljs-attr">    app:</span> kubia
+<span class="hljs-attr">  template:</span>
+<span class="hljs-attr">    metadata:</span>
+<span class="hljs-attr">      labels:</span>
+<span class="hljs-attr">        app:</span> kubia
+<span class="hljs-attr">    spec:</span>
+<span class="hljs-attr">      containers:</span>
+<span class="hljs-attr">      - name:</span> kubia
+<span class="hljs-attr">        image:</span> luksa/kubia
+<span class="hljs-attr">        imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">        ports:</span>
+<span class="hljs-attr">        - containerPort:</span> <span class="hljs-number">8080</span>
+</code></pre>
+<pre><code class="lang-bash">$ kubectl create <span class="hljs-_">-f</span> kubia-rc.yaml
+$ kubectl describe replicationcontrollers/kubia
+$ pods=$(kubectl get pods --selector=app=kubia --output=jsonpath={.items..metadata.name})
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$pods</span>
+</code></pre>
+<h4 id="&#x5220;&#x9664;-pod">&#x5220;&#x9664; pod</h4>
+<pre><code class="lang-bash">$ kubectl delete pod xxx
+$ kubectl get pods --selector=app=kubia
+</code></pre>
+<p>&#x5982;&#x679C;&#x4E00;&#x4E2A;pod&#x6D88;&#x5931;&#xFF0C; ReplicaController &#x5C06;&#x53D1;&#x73B0;&#x5F53;&#x524D;pod&#x7684;&#x6570;&#x91CF;&#x5C0F;&#x4E8E;ReplicaController&#x7684;&#x526F;&#x672C;&#x6570;&#xFF0C;&#x5219;&#x65B0;&#x5EFA;pod&#xFF1B;
+<img src="../images/rc-delete-pod.png" alt="ReplicaController delete pod "></p>
+<h4 id="&#x8282;&#x70B9;&#x6545;&#x969C;">&#x8282;&#x70B9;&#x6545;&#x969C;</h4>
+<p>&#x5728;worker&#x8282;&#x70B9;&#x4E0A;&#x624B;&#x52A8;&#x505C;&#x6389;&#x8282;&#x70B9;&#x4E0A;&#x7684;kubelet&#xFF0C;&#x6216;&#x8005;&#x65AD;&#x7F51;&#x3001;&#x91CD;&#x542F;&#x7B49;</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># systemctl stop kubelet</span>
+</code></pre>
+<p>&#x5728;master&#x8282;&#x70B9;&#x4E0A;,&#x67E5;&#x770B;&#x662F;&#x5426;&#x6709;&#x6545;&#x969C;node:</p>
+<pre><code>$kubectl get node
+</code></pre><p>&#x67E5;&#x770B;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x4E0B;&#x7684;pod&#xFF0C; &#x7B49;&#x5F85;&#x51E0;&#x5206;&#x949F;</p>
+<h4 id="&#x5C06;pod&#x79FB;&#x5165;&#x6216;&#x79FB;&#x51FA;-replicacontroller">&#x5C06;pod&#x79FB;&#x5165;&#x6216;&#x79FB;&#x51FA; ReplicaController</h4>
+<p>&#x5982;&#x679C;&#x4F60;&#x624B;&#x52A8;&#x4FEE;&#x6539;&#x4E86;&#x4E00;&#x4E2A;pod&#x7684;&#x6807;&#x7B7E;&#xFF0C; &#x4F7F;&#x5B83;&#x4E0D;&#x518D;&#x5339;&#x914D; ReplicaController &#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;pod &#x5C31;&#x53D8;&#x5F97;&#x548C;&#x5176;&#x5B83;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x7684;pod&#x4E00;&#x6837;&#x4E86;&#xFF0C;&#x4E0D;&#x518D;&#x88AB;&#x4EFB;&#x4F55; Controller &#x7BA1;&#x7406;&#x3002;&#x800C;&#x539F; ReplicaController &#x53D1;&#x73B0;&#x5C11;&#x4E86;&#x4E2A; pod&#xFF0C;&#x5E76;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x65B0;&#x7684;pod&#x66FF;&#x6362;&#x5B83;&#x3002;
+<strong><em>&#x7ED9;ReplicaController&#x7BA1;&#x7406;&#x7684;pod&#x6DFB;&#x52A0;&#x6807;&#x7B7E;</em></strong></p>
+<pre><code class="lang-bash">$ kubectl label pod kubia-xxx <span class="hljs-built_in">type</span>=debug
+$ kubectl get pod --show-labels
+</code></pre>
+<p>&#x7ED9;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;pod&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684; type=debug &#x6807;&#x7B7E;&#x4E4B;&#x540E;&#xFF0C; &#x5BF9;&#x4E8E;ReplicaController&#x6765;&#x8BF4;&#xFF0C;&#x662F;&#x6CA1;&#x6709;&#x53D1;&#x751F;&#x4EFB;&#x4F55;&#x66F4;&#x6539;&#x7684;&#xFF1B;
+<strong><em>&#x66F4;&#x6539;ReplicaController&#x4E2D;pod&#x7684;&#x6807;&#x7B7E;</em></strong></p>
+<pre><code class="lang-bash">$ kubectl label pod kubia-xxx app=foo --overwrite
+</code></pre>
+<p><strong><em>PS</em></strong></p>
+<blockquote>
+<p>--overwite &#x53C2;&#x6570;&#x662F;&#x5FC5;&#x8981;&#x7684;&#xFF0C;&#x5426;&#x5219;kubectl &#x4F1A;&#x8F93;&#x51FA;&#x8B66;&#x544A;&#x4FE1;&#x606F;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x5B9E;&#x9645;&#x66F4;&#x6539;&#x6807;&#x7B7E;  </p>
+</blockquote>
+<p>&#x66F4;&#x6539;&#x4E4B;&#x540E;&#xFF0C;&#x67E5;&#x770B;&#x5F53;&#x524D;pod&#x7684;&#x72B6;&#x6001;&#xFF1A;</p>
+<pre><code class="lang-bash">$ kubectl get pod -L app
+</code></pre>
+<p>&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x5B58;&#x5728;&#x56DB;&#x4E2A;pod&#xFF0C; &#x5176;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x662F;&#x8131;&#x79BB;&#x7EC4;&#x7EC7;&#x7684;&#xFF0C;&#x4E0D;&#x88AB;ReplicaController&#x7BA1;&#x7406;&#x7684;pod&#xFF0C;&#x5176;&#x5B83;&#x4E09;&#x4E2A;&#x4ECD;&#x7136;&#x662F;&#x3002;&#x56E0;&#x4E3A;&#x5F53;&#x628A;pod&#x7684;&#x6807;&#x7B7E;&#x4ECE;app=kubia&#x66F4;&#x6539;&#x4E3A;app=foo&#x4E4B;&#x540E;&#xFF0C; ReplicaController &#x5C31;&#x4E0D;&#x7BA1;&#x8FD9;&#x4E2A;pod&#x4E86;&#x3002;&#x4F46;&#x662F;&#x7531;&#x4E8E; ReplicaController&#x7684;&#x526F;&#x672C;&#x6570;&#x4E3A;3&#xFF0C; &#x4E3A;&#x4E86;&#x6EE1;&#x8DB3;&#x526F;&#x672C;&#x6570;&#x9700;&#x6C42;&#xFF0C;&#x5219;&#x65B0;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;pod&#xFF1B;&#x88AB;&#x5B64;&#x7ACB;&#x7684;pod &#x53D8;&#x6210;&#x4E86;bare pod&#xFF0C;&#x5B83;&#x4F1A;&#x4E00;&#x76F4;&#x8FD0;&#x884C;&#xFF0C;&#x76F4;&#x5230;&#x4F60;&#x624B;&#x52A8;&#x5220;&#x9664;&#x5B83;&#xFF0C;&#x6216;&#x8005;&#x56E0;&#x5176;&#x5B83;&#x539F;&#x56E0;&#x88AB;&#x5220;&#x9664;&#xFF1B;
+<img src="../images/rc-relabel-pod.png" alt="rc relabel pod "></p>
+<p><strong><em>&#x601D;&#x8003;&#xFF1A; &#x5982;&#x679C;&#x66F4;&#x6539;&#x4E86; ReplicaController &#x7684;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#xFF0C; &#x540E;&#x679C;&#x4F1A;&#x600E;&#x4E48;&#x6837;&#xFF1F;</em></strong></p>
+<h4 id="&#x4FEE;&#x6539;-pod-&#x6A21;&#x677F;">&#x4FEE;&#x6539; pod &#x6A21;&#x677F;</h4>
+<p>pod&#x7684;&#x6A21;&#x677F;&#x662F;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x4FEE;&#x6539;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x80FD;&#x4F7F;&#x5176;pod &#x7ACB;&#x9A6C;&#x751F;&#x6548;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x65E7;&#x7684;pod&#x5220;&#x9664;&#xFF0C;&#x65B0;&#x7684;pod&#x624D;&#x4F1A;&#x5E94;&#x7528;&#x65B0;&#x7684;&#x6A21;&#x677F;&#xFF1B;</p>
+<pre><code class="lang-bash">$ kubectl edit rc kubia
+</code></pre>
+<p>&#x4E3A; kubia &#x65B0;&#x589E;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#xFF0C;&#x4FDD;&#x5B58;&#x9000;&#x51FA;&#x540E;&#xFF0C;&#x67E5;&#x770B;pod&#x5E76;&#x672A;&#x6709;&#x65B0;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x53EA;&#x6709;&#x5220;&#x9664;&#x540E;&#x65B0;&#x5EFA;&#x7684;pod&#x624D;&#x4F1A;&#x770B;&#x5230;&#x65B0;&#x52A0;&#x7684;&#x6807;&#x7B7E;&#xFF1B;<br><img src="../images/pod-template-update.png" alt="pod template update">
+<strong><em>PS</em></strong></p>
+<blockquote>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4FEE;&#x6539; KUBE_EDITOR &#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6765;&#x544A;&#x8BC9;kubectl &#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x7F16;&#x8F91;&#x5668;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;nano&#x7F16;&#x8F91;&#x5668;&#x7684;&#x8BDD;&#xFF1A;<br>export KUBE_EDITOR=&quot;/usr/bin/nano&quot;.<br>&#x4E0D;&#x7279;&#x6B8A;&#x8BBE;&#x7F6E;&#x7684;&#x8BDD;&#xFF0C;&#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7F16;&#x8F91;&#x5668;&#x3002;</p>
+</blockquote>
+<h4 id="&#x6C34;&#x5E73;&#x4F38;&#x7F29;-pod">&#x6C34;&#x5E73;&#x4F38;&#x7F29; pod</h4>
+<p>ReplicaController &#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;pod&#x5B9E;&#x4F8B;&#x6570;&#x4E0E;&#x671F;&#x671B;&#x7684;&#x526F;&#x672C;&#x6570;&#x4FDD;&#x6301;&#x4E00;&#x76F4;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4FEE;&#x6539; ReplicaController &#x4E2D;&#x7684;replicas&#x5B57;&#x6BB5;&#x7684;&#x503C;&#xFF0C;&#x6765;&#x52A8;&#x6001;&#x4FEE;&#x6539; pod&#x7684;&#x526F;&#x672C;&#x6570;&#xFF0C;&#x66F4;&#x6539;&#x4E4B;&#x540E;&#xFF0C; ReplicaController &#x5C06;&#x4F1A;&#x6839;&#x636E; replicas&#x5B57;&#x6BB5;&#x7684;&#x503C;&#x6765;&#x8C03;&#x6574;&#x5F53;&#x524D;pod&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x6216;&#x5220;&#x9664;&#x6216;&#x65B0;&#x5EFA;&#x3002;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x6B64;&#x76EE;&#x7684;&#x3002;</p>
+<p><strong><em>&#x6269;&#x5BB9;</em></strong><br>1.&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#xFF1A;</p>
+<pre><code class="lang-bash">$ kubectl scale rc kubia --replicas=10
+</code></pre>
+<p>2.&#x901A;&#x8FC7;&#x7F16;&#x8F91;&#x914D;&#x7F6E;&#x6587;&#x4EF6;:</p>
+<pre><code class="lang-bash">$ kubectl edit rc kubia
+spec:
+  replicas: 10   //change 3 to 10
+  selector:
+app: kubia
+</code></pre>
+<p>&#x67E5;&#x770B;&#x4FEE;&#x6539;&#x540E;&#x7684;rc&#x7ED3;&#x679C;&#xFF1A;</p>
+<pre><code class="lang-bash">$ kubectl get rc
+NAME      DESIRED   CURRENT   READY     AGE
+kubia     10        10        4         21m
+</code></pre>
+<p><strong><em>&#x7F29;&#x5BB9;</em></strong>  </p>
+<pre><code class="lang-bash">$ kubectl scale rc kubia --replicas=3
+</code></pre>
+<h4 id="&#x5220;&#x9664;&#x4E00;&#x4E2A;-replicacontroller">&#x5220;&#x9664;&#x4E00;&#x4E2A; ReplicaController</h4>
+<p>&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x4E00;&#x4E2A;rc&#xFF0C;&#x4F46;&#x662F;rc&#x4E0B;&#x9762;&#x7684;pod&#x4E5F;&#x4F1A;&#x968F;&#x4E4B;&#x88AB;&#x5220;&#x9664;&#xFF1B;</p>
+<pre><code class="lang-bash">kubectl delete rc kubia
+</code></pre>
+<p>&#x7531;&#x4E8E;&#x901A;&#x8FC7;ReplicaController &#x521B;&#x5EFA;&#x7684;pod &#x5E76; &#x4E0D;&#x5C5E;&#x4E8E;ReplicaController&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x7531;&#x5176;&#x8FDB;&#x884C;&#x7BA1;&#x7406;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x53EA;&#x5220;&#x9664;rc&#xFF0C;&#x800C;&#x4E0D;&#x5220;&#x9664;pod&#x3002;</p>
+<pre><code class="lang-bash">kubectl delete rc kubia --cascade=<span class="hljs-literal">false</span>
+</code></pre>
+<p>cascade&#x7EA7;&#x8054;&#x5220;&#x9664;&#x53C2;&#x6570;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x662F;true&#x3002;&#x8FD9;&#x6837;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x53EA;&#x5220;&#x9664;rc&#x800C;&#x4E0D;&#x5220;&#x9664;pod&#x4E86;&#x3002;
+<img src="../images/rc-delete-cascade-false.png" alt="rc delete cascade false">
+<strong><em>&#x5E94;&#x7528;&#x573A;&#x666F;</em></strong><br>&#x6BD4;&#x5982;&#xFF0C;rc&#x7684;spec&#x4E2D;&#x67D0;&#x4E9B;&#x5B57;&#x6BB5;&#x4E0D;&#x8BA9;&#x4FEE;&#x6539;&#x6216;patch&#xFF0C; &#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5173;&#x95ED;&#x7EA7;&#x8054;&#x5220;&#x9664;&#x9009;&#x9879;&#x65F6;&#x5220;&#x9664;&#x65E7;&#x7684;rc&#xFF0C;&#x7136;&#x540E;&#x4FEE;&#x6539;rc&#x7684;yaml&#x540E;&#xFF0C;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x8BE5;rc&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x4F9D;&#x7136;&#x548C;&#x4E4B;&#x524D;&#x7684;pod&#x8FDB;&#x884C;&#x5173;&#x8054;&#x8D77;&#x6765;&#xFF1B;</p>
+<h4 id="rc-&#x7684;&#x4E0D;&#x8DB3;&#x4E4B;&#x5904;">RC &#x7684;&#x4E0D;&#x8DB3;&#x4E4B;&#x5904;</h4>
+<ol>
+<li>&#x5355;&#x4E2A;RC&#x65E0;&#x6CD5;&#x5C06;pod&#x4E0E;&#x6807;&#x7B7E; env=devel,env=prod &#x540C;&#x65F6;&#x5339;&#x914D;&#xFF0C;&#x53EA;&#x80FD;&#x5339;&#x914D; env=devel&#x7684;pod&#xFF0C;&#x6216;&#x8005; env=prod&#x7684;pod&#x3002;</li>
+<li>RC&#x65E0;&#x6CD5;&#x6839;&#x636E;pod&#x6807;&#x7B7E;&#x540D;&#x8FDB;&#x884C;&#x8FDB;&#x884C;&#x5339;&#x914D;pod</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="workload.md" class="navigation navigation-prev " aria-label="Previous page: 06.workload">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="replicaset.html" class="navigation navigation-next " aria-label="Next page: 06-2.replicaset">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"06-1.replicacontroller","level":"1.7.1","depth":2,"next":{"title":"06-2.replicaset","level":"1.7.2","depth":2,"path":"workload/replicaset.md","ref":"workload/replicaset.md","articles":[]},"previous":{"title":"06.workload","level":"1.7","depth":1,"path":"workload/workload.md","ref":"workload/workload.md","articles":[{"title":"06-1.replicacontroller","level":"1.7.1","depth":2,"path":"workload/replicacontroller.md","ref":"workload/replicacontroller.md","articles":[]},{"title":"06-2.replicaset","level":"1.7.2","depth":2,"path":"workload/replicaset.md","ref":"workload/replicaset.md","articles":[]},{"title":"06-2.daemonset","level":"1.7.3","depth":2,"path":"workload/daemonset.md","ref":"workload/daemonset.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["search","-sharing","theme-default","lunr","fontsettings","livereload","highlight","livereload"],"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"workload/replicacontroller.md","mtime":"2019-04-15T12:15:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T11:37:02.187Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+
+    </body>
+</html>
+

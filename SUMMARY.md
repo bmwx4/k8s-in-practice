@@ -80,4 +80,5 @@
     1. [k8s-custem-development](tasks/k8s-compile.md)
     1. [gitlab](tasks/gitlab.md)
     1. [jenkins](tasks/jenkins.md)
-    1. [cicd](tasks/cicd.md)
+    1. [ceph-deploy](tasks/ceph-deploy.md)
+    1. [rook](tasks/rook.md)

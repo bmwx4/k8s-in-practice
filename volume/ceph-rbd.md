@@ -52,6 +52,7 @@ $ kubectl create secret generic ceph-bmw-secret --type="kubernetes.io/rbd" --fro
 ```
 
 ### 静态PV
+![static](/images/static-pv.jpg)
 **创建一个image:**  
 ```bash
 $ rbd create bmw/ceph-image -s 20
@@ -172,6 +173,7 @@ nginx-static-pv-test   1/1     Running   0          20s   172.30.7.9   192.168.1
 --------------------
 
 ### 动态PV
+![dynamic](/images/dynamic-pv.jpg)
 #### 创建 storageClass
 ```bash
 cat >storageclass-ceph-rdb.yaml<<EOF

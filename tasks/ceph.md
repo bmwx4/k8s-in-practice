@@ -1,89 +1,143 @@
-# ceph 容器化
 
-- 拉取新版 ceph 镜像
-```bash
-$ docker pull ceph/daemon:latest
-```
+# ceph-deploy
 
-- 调整内核参数
+#### 部署ceph组件:
 ```bash
-cat >> /etc/sysctl.conf << EOF
-kernel.pid_max=4194303
-vm.swappiness = 0
-EOF
-sysctl -p
+ceph-deploy install --no-adjust-repos kube-master01
 ```
 
-read_ahead, 通过数据预读并且记载到随机访问内存方式提高磁盘读操作，根据一些Ceph的公开分享，8192是比较理想的值
-```bash
-echo "8192" > /sys/block/sda/queue/read_ahead_kb
+#### 配置yum源
+```
+目标版本:
+# ceph --version
+ceph version 12.2.12 (1436006594665279fe734b4c15d7e08c13ebd777) luminous (stable)
+yum源:
+[root@node02 ~]# cat /etc/yum.repos.d/ceph.repo
+[ceph]
+name=Ceph packages for $basearch
+baseurl=http://mirrors.163.com/ceph/rpm-luminous/el7/$basearch
+enabled=1
+priority=2
+gpgcheck=1
+gpgkey=https://download.ceph.com/keys/release.asc
+
+[ceph-noarch]
+name=Ceph noarch packages
+baseurl=http://mirrors.163.com/ceph/rpm-luminous/el7/noarch
+enabled=1
+priority=2
+gpgcheck=1
+gpgkey=https://download.ceph.com/keys/release.asc
+
+[ceph-source]
+name=Ceph source packages
+baseurl=http://mirrors.163.com/ceph/rpm-luminous/el7/SRPMS
+enabled=0
+priority=2
+gpgcheck=1
+gpgkey=https://download.ceph.com/keys/release.asc
 ```
 
-I/O Scheduler，关于I/O Scheculder 的调整，简单说SSD要用noop，SATA/SAS使用deadline
-```bash
-echo "deadline" > /sys/block/sd[x]/queue/scheduler
-echo "noop" > /sys/block/sd[x]/queue/scheduler
+------------------------
+
+添加ceph集群:
+```
+ceph-deploy new --public-network 192.168.10.0/24  kube-master01
 ```
 
-#### 配置命令：
-由于我们是容器化部署的，ceph的客户端也在容器内部，所以我们需要把容器内的 ceph 命令 alias 到本地，方便使用，其他 ceph 相关命令也可以参考添加：
+添加mons:
+```
+ceph-deploy mon create kube-master01
+初始化monitor以及生成key
+ceph-deploy mon create-initial
+复制配置文件和密码到管理节点的/etc/ceph目录下,允许一主机以管理员权限执行 Ceph 命令
+ceph-deploy admin kube-master01
+```
+创建manager守护进程
 ```bash
-echo 'alias ceph="docker exec mon ceph"' >> /etc/profile
-source /etc/profile
+ceph-deploy mgr create kube-master01
 ```
 
-#### 部署 ceph
-启动MON:
+添加osd
 ```bash
-docker run -d --net=host \
-    --name=ceph-mon \
-    --restart=always \
-    -v /etc/localtime:/etc/localtime \
-    -v /home/ceph/etc:/etc/ceph \
-    -v /home/ceph/lib:/var/lib/ceph \
-    -v /home/ceph/logs:/var/log/ceph \
-    -e MON_IP=10.86.77.36 \
-    -e CEPH_PUBLIC_NETWORK=10.86.0.0/16 \
-    ceph/daemon:latest mon
+# ceph-deploy osd create --data /dev/sdb kube-master01
+# ceph osd crush tunables jewel
+# ceph osd crush reweight-all  
 ```
-***PS:***
-```
-MON_IP 是集群所有Mon节点的ip，要写全， 中间用逗号分隔；如果IP是跨网段的，CEPH_PUBLIC_NETWORK 的配置必须覆盖所有网段；
-```
-启动OSD:
+查看集群健康状态:
 ```bash
-docker run -d \
-    --name=osd_data1 \
-    --net=host \
-    --restart=always \
-    --privileged=true \
-    --pid=host \
-    -v /etc/localtime:/etc/localtime \
-    -v /home/ceph/etc:/etc/ceph \
-    -v /home/ceph/lib:/var/lib/ceph \
-    -v /home/ceph/logs:/var/log/ceph \
-    -v /home/data/osd1:/var/lib/ceph/osd \
-    ceph/daemon:latest osd_directory
+ceph health
+ceph -s
+```
+为了能使用CephFS,这里将 kube-master01 设置为 metadata 服务器:
+```bash
+ceph-deploy mds create kube-master01
+ceph mds stat
 ```
 
-启动MDS:
+验证集群状态：
 ```bash
-docker run -d \
-    --net=host \
-    --name=mds \
-    --restart=always \
-    --privileged=true \
-    -v /etc/localtime:/etc/localtime \
-    -v /home/ceph/etc:/etc/ceph \
-    -v /home/ceph/lib/:/var/lib/ceph/ \
-    -v /data/ceph/logs/:/var/log/ceph/ \
-    -e CEPHFS_CREATE=0 \  
-    -e CEPHFS_METADATA_POOL_PG=512 \
-    -e CEPHFS_DATA_POOL_PG=512 \
-    ceph/daemon:latest mds
+# ceph -s
+  cluster:
+    id:     087b8803-261d-43a7-9666-69771e2eca5f
+    health: HEALTH_OK
+
+  services:
+    mon: 1 daemons, quorum kube-master01
+    mgr: kube-master01(active)
+    osd: 1 osds: 1 up, 1 in
+
+  data:
+    pools:   0 pools, 0 pgs
+    objects: 0 objects, 0B
+    usage:   1.00GiB used, 19.0GiB / 20.0GiB avail
+    pgs:     
+# ceph osd status
++----+---------------+-------+-------+--------+---------+--------+---------+-----------+
+| id |      host     |  used | avail | wr ops | wr data | rd ops | rd data |   state   |
++----+---------------+-------+-------+--------+---------+--------+---------+-----------+
+| 0  | kube-master01 | 1024M | 18.9G |    0   |     0   |    0   |     0   | exists,up |
++----+---------------+-------+-------+--------+---------+--------+---------+-----------+
 ```
-注解：
+
+#### 创建 pool:
+```bash
+# ceph osd pool create bmw 64
+# ceph osd pool set bmw size 10
+#  ceph osd lspools     
+1 bmw
 ```
-CEPHFS_CREATE: 0表示不自动创建文件系统（推荐），1表示自动创建
+创建用户:
+```bash
+# ceph auth get-or-create client.bmw mon 'allow r' osd 'allow rwx pool=bmw' -o ceph.client.bmw.keyring
+# ceph auth get-key client.admin
+AQBG+N9cZT/TGhAA2CRtHHJUMnmhSBIYFWQWcg==
+# ceph auth get-key client.bmw  
+AQDh/N9cAqRsAxAAau/WQ3zlVkPoSjn42THfJA==
 ```
-docker run -d --net=host --name=osd1 -v /etc/ceph:/etc/ceph -v /home/ceph/lib:/var/lib/ceph -v /dev:/dev -v /home/data/osd1:/var/lib/ceph/osd --privileged=true ceph/daemon:latest osd_directory
+正常来说，有了 pool的名字和 key， 我们就可以通过 k8s 访问ceph了；
+
+#### 创建 image
+```bash
+# rbd create --size 1 bmw/testimage --id admin -m 192.168.10.231:6789 --key=AQBG+N9cZT/TGhAA2CRtHHJUMnmhSBIYFWQWcg==
+# rbd ls bmw
+```
+
+-----------------
+
+清理集群配置信息:
+```
+ rm -rf /etc/ceph/*
+ rm -rf /var/lib/ceph/*/*
+ rm -rf /var/log/ceph/*
+ rm -rf /var/run/ceph/*
+```
+
+#### TS
+如果创建image时报错是关于 featrure missing 400000000000000的，可以通过如下方式解决：
+```bash
+# ceph osd crush tunables jewel
+# ceph osd crush reweight-all  
+```
+
+***PS:*** 客户端和服务端版本要一致、要一致、要一致；

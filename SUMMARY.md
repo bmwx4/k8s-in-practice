@@ -41,14 +41,14 @@
     1. [09-1.emptydir](volume/emptydir.md)
     1. [09-2.hostpath](volume/hostpath.md)
     1. [09-3.nfs](volume/nfs.md)
-    1. [09-4.ceph-rbd](volume/ceph-rbd.md)
-    1. [09-5.cephfs](volume/cephfs.md)
-    1. [09-6.dynamic](volume/dynamic.md)
+    1. [09-4.dynamic](volume/pv-and-pvc.md)
+    1. [09-5.ceph-rbd](volume/ceph-rbd.md)
+    1. [09-6.cephfs](volume/cephfs.md)
 
 1. [10.StatefulSet](statefulset/readme.md)
     1. [10-1.sts-overview](statefulset/sts-overview.md)
     1. [10-2.sts-practice](statefulset/sts-practice.md)
-    1. [10-3.sts-upgrade](statefulset/sts-upgrade.md)
+    1. [10-3.sts-upgrade](statefulset/sts-update.md)
 
 1. [11.Scheduler](scheduler/readme.md)
     1. [11-1.pod-affinity](scheduler/pod-affinity.md)

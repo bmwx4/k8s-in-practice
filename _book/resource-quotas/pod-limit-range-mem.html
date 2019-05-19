@@ -1,0 +1,1391 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>05-3.pod-limit-range-mem · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="pod-limit-range-cpu.html" />
+    
+    
+    <link rel="prev" href="pod-qos.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../concept/design.html">
+            
+                <a href="../concept/design.html">
+            
+                    
+                    01-1.Kubernetes 设计原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/object.html">
+            
+                <a href="../concept/object.html">
+            
+                    
+                    02-1.Kubernetes 对象介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../concept/kubectl.html">
+            
+                <a href="../concept/kubectl.html">
+            
+                    
+                    03-1.kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../concept/pod-state-and-lifecycle.html">
+            
+                <a href="../concept/pod-state-and-lifecycle.html">
+            
+                    
+                    04.pod状态与生命周期管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../concept/pod-overview.html">
+            
+                <a href="../concept/pod-overview.html">
+            
+                    
+                    04-1.pod-view
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../concept/pause-container.html">
+            
+                <a href="../concept/pause-container.html">
+            
+                    
+                    04-2.pause-container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../concept/pod-lifecycle.html">
+            
+                <a href="../concept/pod-lifecycle.html">
+            
+                    
+                    04-3.pod-lifecycel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../concept/pod-probe.html">
+            
+                <a href="../concept/pod-probe.html">
+            
+                    
+                    04-4.pod-probe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../concept/pod-hook.html">
+            
+                <a href="../concept/pod-hook.html">
+            
+                    
+                    04-5.pod-hook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../concept/init-containers.html">
+            
+                <a href="../concept/init-containers.html">
+            
+                    
+                    04-6.init-container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../concept/pod-preset.md">
+            
+                <span>
+            
+                    
+                    04-7.pod-preset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="resource-manager.html">
+            
+                <a href="resource-manager.html">
+            
+                    
+                    05.pod计算资源管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="pod-resource.html">
+            
+                <a href="pod-resource.html">
+            
+                    
+                    05-1.pod-resource
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="pod-qos.html">
+            
+                <a href="pod-qos.html">
+            
+                    
+                    05-2.pod-qos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="pod-limit-range-mem.html">
+            
+                <a href="pod-limit-range-mem.html">
+            
+                    
+                    05-3.pod-limit-range-mem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="pod-limit-range-cpu.html">
+            
+                <a href="pod-limit-range-cpu.html">
+            
+                    
+                    05-4.pod-limit-range-cpu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="pod-cpu-mem-quota.html">
+            
+                <a href="pod-cpu-mem-quota.html">
+            
+                    
+                    05-5.pod-cpu-mem-quota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="pod-count-quota.html">
+            
+                <a href="pod-count-quota.html">
+            
+                    
+                    05-6.pod-count-quota
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="pod-extentd-resources.md">
+            
+                <span>
+            
+                    
+                    05-7.pod-extentd-resource
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../workload/workload.md">
+            
+                <span>
+            
+                    
+                    06.workload
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../workload/replicacontroller.html">
+            
+                <a href="../workload/replicacontroller.html">
+            
+                    
+                    06-1.replicacontroller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../workload/replicaset.html">
+            
+                <a href="../workload/replicaset.html">
+            
+                    
+                    06-2.replicaset
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../workload/daemonset.html">
+            
+                <a href="../workload/daemonset.html">
+            
+                    
+                    06-2.daemonset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../service/service.html">
+            
+                <a href="../service/service.html">
+            
+                    
+                    07.service
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../service/introduction.html">
+            
+                <a href="../service/introduction.html">
+            
+                    
+                    07-1.introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../service/service-type.html">
+            
+                <a href="../service/service-type.html">
+            
+                    
+                    07-2.service-type
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../service/ingress.html">
+            
+                <a href="../service/ingress.html">
+            
+                    
+                    07-3.ingress
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../service/svc-and-readiness-probe.html">
+            
+                <a href="../service/svc-and-readiness-probe.html">
+            
+                    
+                    07-4.svc-and-readiness-probe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../service/headless.html">
+            
+                <a href="../service/headless.html">
+            
+                    
+                    07-5.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../deployment/readme.md">
+            
+                <span>
+            
+                    
+                    08.deployment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../deployment/deployment-rc.html">
+            
+                <a href="../deployment/deployment-rc.html">
+            
+                    
+                    08-1.deployment-background
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../deployment/deployment.html">
+            
+                <a href="../deployment/deployment.html">
+            
+                    
+                    08-2.deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../volume/volume.md">
+            
+                <span>
+            
+                    
+                    09.volume
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../volume/emptydir.html">
+            
+                <a href="../volume/emptydir.html">
+            
+                    
+                    09-1.emptydir
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../volume/hostpath.html">
+            
+                <a href="../volume/hostpath.html">
+            
+                    
+                    09-2.hostpath
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../volume/nfs.html">
+            
+                <a href="../volume/nfs.html">
+            
+                    
+                    09-2.nfs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../volume/ceph-rbd.html">
+            
+                <a href="../volume/ceph-rbd.html">
+            
+                    
+                    09-3.ceph-rbd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../volume/cephfs.md">
+            
+                <span>
+            
+                    
+                    09-3.cephfs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../volume/dynamic.md">
+            
+                <span>
+            
+                    
+                    09-4.dynamic
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../statefulset/readme.md">
+            
+                <span>
+            
+                    
+                    10.StatefulSet
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../statefulset/sts-overview.md">
+            
+                <span>
+            
+                    
+                    10-1.sts-overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../statefulset/sts-practice.md">
+            
+                <span>
+            
+                    
+                    10-1.sts-practice
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../statefulset/sts-upgrade.md">
+            
+                <span>
+            
+                    
+                    10-2.sts-upgrade
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../scheduler/readme.md">
+            
+                <span>
+            
+                    
+                    11.Scheduler
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../scheduler/pod-affinity.md">
+            
+                <span>
+            
+                    
+                    11-1.pod-affinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../scheduler/pod-antiaffinity.md">
+            
+                <span>
+            
+                    
+                    10-2.pod-antiaffinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../scheduler/node-affinity.md">
+            
+                <span>
+            
+                    
+                    10-1.node-affinity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../scheduler/taints-tolerations.md">
+            
+                <span>
+            
+                    
+                    07-2.taints-tolerations
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../security/readme.md">
+            
+                <span>
+            
+                    
+                    12.security
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../security/security-context.md">
+            
+                <span>
+            
+                    
+                    11-1.security-context
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../security/rbac.md">
+            
+                <span>
+            
+                    
+                    11-2.rbac
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../applications-config/readme.md">
+            
+                <span>
+            
+                    
+                    13.applications-config
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../applications-config/command-line-arguments.md">
+            
+                <span>
+            
+                    
+                    13-1.command-line-arguments
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../applications-config/environment.md">
+            
+                <span>
+            
+                    
+                    13-2.environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../applications-config/configmap.md">
+            
+                <span>
+            
+                    
+                    13-3.ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../applications-config/secret.md">
+            
+                <span>
+            
+                    
+                    13-4.Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.5" data-path="../applications-config/downward-api.md">
+            
+                <span>
+            
+                    
+                    13-4.downwardAPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../ops/readme.md">
+            
+                <span>
+            
+                    
+                    14.ops
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../ops/high-availability.md">
+            
+                <span>
+            
+                    
+                    13-1.high-availability
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../ops/etcd.md">
+            
+                <span>
+            
+                    
+                    13-2.etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../ops/metrics.md">
+            
+                <span>
+            
+                    
+                    13-3.metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../tasks/tasks.md">
+            
+                <span>
+            
+                    
+                    Tasks
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="../tasks/hostalias.md">
+            
+                <span>
+            
+                    
+                    hostalias
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="../tasks/client-go.html">
+            
+                <a href="../tasks/client-go.html">
+            
+                    
+                    k8s-app-development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="../tasks/replay-example.html">
+            
+                <a href="../tasks/replay-example.html">
+            
+                    
+                    replay-example
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.4" data-path="../tasks/replay-template.html">
+            
+                <a href="../tasks/replay-template.html">
+            
+                    
+                    replay-template
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.5" data-path="../tasks/k8s-compile.html">
+            
+                <a href="../tasks/k8s-compile.html">
+            
+                    
+                    k8s-custem-development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.6" data-path="../tasks/gitlab.html">
+            
+                <a href="../tasks/gitlab.html">
+            
+                    
+                    gitlab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.7" data-path="../tasks/jenkins.html">
+            
+                <a href="../tasks/jenkins.html">
+            
+                    
+                    jenkins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.8" data-path="../tasks/cicd.md">
+            
+                <span>
+            
+                    
+                    cicd
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >05-3.pod-limit-range-mem</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7ED9;pod-&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x7684;memory-requests-&#x548C;-limits">&#x7ED9;pod &#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x7684;memory requests &#x548C; limits</h1>
+<p>&#x901A;&#x8FC7;&#x524D;&#x9762;&#x7684;&#x7406;&#x89E3;&#xFF0C; &#x5176;&#x5B9E;&#x4E3A;&#x6BCF;&#x4E2A;&#x5BB9;&#x5668;&#x663E;&#x793A;&#x8BBE;&#x7F6E;&#x4E0A; requests &#x548C; limits &#x624D;&#x662F;&#x6700;&#x597D;&#x7684;&#x5B9E;&#x8DF5;&#x3002;
+&#x53EF;&#x4EE5;&#x4F7F;&#x7528; LimitRange &#x5BF9;&#x8C61;&#x6765;&#x4E3A;&#x6BCF;&#x4E2A;pod &#x90FD;&#x8BBE;&#x7F6E;&#x4E0A;&#x9ED8;&#x8BA4;&#x7684; requests &#x548C; limits&#x3002;</p>
+<h4 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7528;&#x7684;ns">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7528;&#x7684;ns</h4>
+<pre><code class="lang-bash">$ kubectl create namespace default-mem-example
+</code></pre>
+<h4 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;limitrange">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;limitRange:</h4>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt;  memory-limitRange-defaults.yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> LimitRange
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> mem-limit-range
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  limits:</span>
+<span class="hljs-attr">  - default:</span>
+<span class="hljs-attr">      memory:</span> <span class="hljs-number">512</span>Mi
+<span class="hljs-attr">    defaultRequest:</span>
+<span class="hljs-attr">      memory:</span> <span class="hljs-number">256</span>Mi
+<span class="hljs-attr">    type:</span> Container
+EOF
+</code></pre>
+<pre><code class="lang-bash">$ kubectl apply <span class="hljs-_">-f</span>  memory-limitRange-defaults.yaml --namespace=default-mem-example
+</code></pre>
+<h4 id="&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod">&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod</h4>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt; memory-defaults.yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> default-mem-demo
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> default-mem-demo-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+EOF
+</code></pre>
+<pre><code class="lang-bash">$ kubectl apply <span class="hljs-_">-f</span>  memory-defaults.yaml --namespace=default-mem-example
+</code></pre>
+<h4 id="&#x6307;&#x5B9A;mem&#x7684;-limits-&#x4E0D;&#x6307;&#x5B9A;-requests-&#x7684;pod">&#x6307;&#x5B9A;mem&#x7684; limits &#x4E0D;&#x6307;&#x5B9A; requests &#x7684;pod</h4>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt;  default-mem-demo<span class="hljs-bullet">-2.</span>yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> default-mem-demo<span class="hljs-bullet">-2</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> default-mem-demo<span class="hljs-bullet">-2</span>-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">    resources:</span>
+<span class="hljs-attr">      limits:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;1Gi&quot;</span>
+EOF
+</code></pre>
+<p>&#x9A8C;&#x8BC1;&#x6548;&#x679C;</p>
+<pre><code class="lang-yaml">$ kubectl describe -f default-mem-demo<span class="hljs-bullet">-2.</span>yaml --namespace=default-mem-example
+...
+<span class="hljs-attr">Containers:</span>
+<span class="hljs-attr">  default-mem-demo-2-ctr:</span>
+    ....
+<span class="hljs-attr">    Limits:</span>
+<span class="hljs-attr">      memory:</span>  <span class="hljs-number">1</span>Gi
+<span class="hljs-attr">    Requests:</span>
+<span class="hljs-attr">      memory:</span>     <span class="hljs-number">1</span>Gi
+</code></pre>
+<h4 id="&#x6307;&#x5B9A;mem&#x7684;-requests-&#x4E0D;&#x6307;&#x5B9A;-limits-&#x7684;pod">&#x6307;&#x5B9A;mem&#x7684; requests &#x4E0D;&#x6307;&#x5B9A; limits &#x7684;pod</h4>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF  &gt;  default-mem-demo<span class="hljs-bullet">-3.</span>yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> default-mem-demo<span class="hljs-bullet">-3</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> default-mem-demo<span class="hljs-bullet">-3</span>-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">    resources:</span>
+<span class="hljs-attr">      requests:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;128Mi&quot;</span>
+EOF
+</code></pre>
+<pre><code class="lang-bash">$ kubectl apply <span class="hljs-_">-f</span>  default-mem-demo-3.yaml --namespace=default-mem-example
+$ kubectl describe pod default-mem-demo-3 --namespace=default-mem-example
+</code></pre>
+<p>&#x67E5;&#x770B;&#x6548;&#x679C;&#xFF1A;</p>
+<pre><code class="lang-yaml">
+....
+<span class="hljs-attr">Containers:</span>
+<span class="hljs-attr">  default-mem-demo-2-ctr:</span>
+    ....
+<span class="hljs-attr">  limits:</span>
+<span class="hljs-attr">    memory:</span> <span class="hljs-number">512</span>Mi
+<span class="hljs-attr">  requests:</span>
+<span class="hljs-attr">    memory:</span> <span class="hljs-number">128</span>Mi
+</code></pre>
+<hr>
+<p>&#x786E;&#x8BA4;&#x6F14;&#x793A;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#xFF0C;&#x6E05;&#x7406;&#x73AF;&#x5883;</p>
+<pre><code class="lang-bash">$ kubectl delete namespace default-mem-example
+</code></pre>
+<h1 id="&#x7ED9;pod-&#x8BBE;&#x7F6E;&#x6700;&#x5C0F;&#x6700;&#x5927;-memory-&#x8D44;&#x6E90;&#x7EA6;&#x675F;&#x9650;&#x5236;">&#x7ED9;pod &#x8BBE;&#x7F6E;&#x6700;&#x5C0F;&#x6700;&#x5927; memory &#x8D44;&#x6E90;&#x7EA6;&#x675F;&#x9650;&#x5236;</h1>
+<p><strong><em>&#x521B;&#x5EFA;&#x5BB9;&#x5668;&#x65F6;&#x7EA6;&#x675F;&#x9A8C;&#x8BC1;&#x8FC7;&#x7A0B;&#xFF1A;</em></strong></p>
+<pre><code>1. &#x5982;&#x679C;&#x5BB9;&#x5668;&#x6CA1;&#x6709;&#x6307;&#x5B9A; requests &#x548C; limits, &#x5C06;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x8D44;&#x6E90;&#x8FDB;&#x884C;&#x5206;&#x914D;
+2. &#x9A8C;&#x8BC1;&#x5BB9;&#x5668;&#x662F;&#x5426;&#x6307;&#x5B9A;&#x4E86;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;min.cpu &#x7684;CPU&#x8BF7;&#x6C42;&#x9650;&#x5236;
+3. &#x9A8C;&#x8BC1;&#x5BB9;&#x5668;&#x662F;&#x5426;&#x6307;&#x5B9A;&#x4E86;&#x5C0F;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;max.cpu &#x7684;CPU&#x8BF7;&#x6C42;&#x9650;&#x5236;
+</code></pre><p>&#x9996;&#x5148;&#x4E3A;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x521B;&#x5EFA;&#x72EC;&#x7ACB;&#x7684;ns</p>
+<pre><code>kubectl create namespace constraints-mem-example
+</code></pre><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;memory&#x7684;limitrange&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt;  memory-constraints.yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> LimitRange
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> mem-min-max-demo-lr
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  limits:</span>
+<span class="hljs-attr">  - max:</span>
+<span class="hljs-attr">      memory:</span> <span class="hljs-number">1</span>Gi
+<span class="hljs-attr">    min:</span>
+<span class="hljs-attr">      memory:</span> <span class="hljs-number">500</span>Mi
+<span class="hljs-attr">    type:</span> Container
+EOF
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x5E76;&#x9A8C;&#x8BC1;&#xFF1A;</p>
+<pre><code class="lang-bash">kubectl apply <span class="hljs-_">-f</span> memory-constraints.yaml --namespace=constraints-mem-example
+kubectl get limitrange mem-min-max-demo-lr --namespace=constraints-mem-example --output=yaml
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8D85;&#x51FA; memory &#x7EA6;&#x675F;&#x6700;&#x5927;&#x503C;&#x9650;&#x5236;&#x7684;pod</p>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt; memory-constraints-pod<span class="hljs-bullet">-2.</span>yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> constraints-mem-demo<span class="hljs-bullet">-2</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> constraints-mem-demo<span class="hljs-bullet">-2</span>-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">    resources:</span>
+<span class="hljs-attr">      limits:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;1.5Gi&quot;</span>
+<span class="hljs-attr">      requests:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;800Mi&quot;</span>
+EOF
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x5E76;&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x521B;&#x5EFA;&#x6210;&#x529F;&#xFF1A;</p>
+<pre><code class="lang-bash">$ kubectl apply <span class="hljs-_">-f</span> memory-constraints-pod-2.yaml --namespace=constraints-mem-example
+$ kubectl describe <span class="hljs-_">-f</span> memory-constraints-pod-2.yaml --namespace=constraints-mem-example
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5C0F;&#x4E8E; memory &#x7EA6;&#x675F;&#x6700;&#x5C0F;&#x503C;&#x9650;&#x5236;&#x7684;pod</p>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF &gt; memory-constraints-pod<span class="hljs-bullet">-3.</span>yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> constraints-mem-demo<span class="hljs-bullet">-3</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> constraints-mem-demo<span class="hljs-bullet">-3</span>-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+<span class="hljs-attr">    resources:</span>
+<span class="hljs-attr">      limits:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;800Mi&quot;</span>
+<span class="hljs-attr">      requests:</span>
+<span class="hljs-attr">        memory:</span> <span class="hljs-string">&quot;100Mi&quot;</span>
+EOF
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x5E76;&#x9A8C;&#x8BC1;&#xFF1A;</p>
+<pre><code class="lang-bash">$ kubectl apply <span class="hljs-_">-f</span> memory-constraints-pod-3.yaml --namespace=constraints-mem-example
+$ kubectl describe <span class="hljs-_">-f</span> memory-constraints-pod-3.yaml --namespace=constraints-mem-example
+</code></pre>
+<p>&#x6700;&#x540E;&#x518D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x6307;&#x5B9A; memory requests &#x6216; limit&#x9650;&#x5236;&#x7684;pod</p>
+<pre><code class="lang-yaml">cat &lt;&lt; EOF  &gt;  memory-constraints-pod<span class="hljs-bullet">-4.</span>yaml
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Pod
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> constraints-mem-demo<span class="hljs-bullet">-4</span>
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  containers:</span>
+<span class="hljs-attr">  - name:</span> constraints-mem-demo<span class="hljs-bullet">-4</span>-ctr
+<span class="hljs-attr">    image:</span> nginx
+<span class="hljs-attr">    imagePullPolicy:</span> IfNotPresent
+EOF
+</code></pre>
+<pre><code class="lang-bash">kubectl apply <span class="hljs-_">-f</span> memory-constraints-pod-4.yaml --namespace=constraints-mem-example
+kubectl get pod constraints-mem-demo-4 --namespace=constraints-mem-example --output=yaml
+</code></pre>
+<h4 id="&#x603B;&#x7ED3;&#xFF1A;">&#x603B;&#x7ED3;&#xFF1A;</h4>
+<p><strong>limitRange</strong> &#x5E94;&#x7528;&#x4E8E;&#x5355;&#x72EC;&#x7684;pod&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C; &#x800C;&#x6211;&#x4EEC;&#x540C;&#x65F6;&#x4E5F;&#x9700;&#x8981;&#x4E00;&#x79CD;&#x624B;&#x6BB5;&#x53EF;&#x4EE5;&#x9650;&#x5236;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x53EF;&#x7528;&#x8D44;&#x6E90;&#x603B;&#x91CF;&#x3002;
+&#x8BF7;&#x786E;&#x4FDD;&#x6F14;&#x793A;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#xFF0C;&#x6E05;&#x626B;&#x73AF;&#x5883;</p>
+<pre><code class="lang-bash">$ kubectl delete namespace constraints-mem-example
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="pod-qos.html" class="navigation navigation-prev " aria-label="Previous page: 05-2.pod-qos">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="pod-limit-range-cpu.html" class="navigation navigation-next " aria-label="Next page: 05-4.pod-limit-range-cpu">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"05-3.pod-limit-range-mem","level":"1.6.3","depth":2,"next":{"title":"05-4.pod-limit-range-cpu","level":"1.6.4","depth":2,"path":"resource-quotas/pod-limit-range-cpu.md","ref":"resource-quotas/pod-limit-range-cpu.md","articles":[]},"previous":{"title":"05-2.pod-qos","level":"1.6.2","depth":2,"path":"resource-quotas/pod-qos.md","ref":"resource-quotas/pod-qos.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["search","-sharing","theme-default","lunr","fontsettings","livereload","highlight","livereload"],"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{},"highlight":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"resource-quotas/pod-limit-range-mem.md","mtime":"2019-04-15T12:09:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T11:37:02.187Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+
+    </body>
+</html>
+

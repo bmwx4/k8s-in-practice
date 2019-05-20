@@ -1,16 +1,13 @@
 
 # ceph-deploy
 
-#### 部署ceph组件:
+#### yum 安装 ceph-deploy 
 ```bash
-ceph-deploy install --no-adjust-repos kube-master01
+yum install ceph-deploy
 ```
 
 #### 配置yum源
 ```
-目标版本:
-# ceph --version
-ceph version 12.2.12 (1436006594665279fe734b4c15d7e08c13ebd777) luminous (stable)
 yum源:
 [root@node02 ~]# cat /etc/yum.repos.d/ceph.repo
 [ceph]
@@ -37,7 +34,18 @@ priority=2
 gpgcheck=1
 gpgkey=https://download.ceph.com/keys/release.asc
 ```
+#### 部署ceph组件:
+```bash
+ceph-deploy install --no-adjust-repos kube-master01
+....
+[kube-master01][DEBUG ] Complete!
+[kube-master01][INFO  ] Running command: ceph --version
+[kube-master01][DEBUG ] ceph version 12.2.12 (1436006594665279fe734b4c15d7e08c13ebd777) luminous (stable)
 
+# check ceph version 
+ceph -v
+ceph version 12.2.12 (1436006594665279fe734b4c15d7e08c13ebd777) luminous (stable)
+```
 ------------------------
 
 添加ceph集群:

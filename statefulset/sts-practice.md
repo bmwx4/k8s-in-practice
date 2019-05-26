@@ -2,7 +2,7 @@
 
 #### 创建 StatefulSet
 ```yaml
-# web-sts.yaml
+# web.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,14 +13,14 @@ spec:
   ports:
   - port: 80
     name: web
-  clusterIP: None
+  clusterIP: None  # 设置为Node，代表是 Headless Service
   selector:
     app: nginx
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: web-sts
+  name: web
 spec:
   serviceName: "nginx"
   replicas: 5
@@ -39,7 +39,7 @@ spec:
 ```
 创建并验证结果:
 ```bash
-# kubectl  create  -f web-sts.yaml
+# kubectl  create  -f web.yaml
 # kubectl  get sts -o wide
 ```
 
@@ -69,7 +69,7 @@ kubectl scale sts web --replicas=0
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: web-sts
+  name: web
 spec:
   serviceName: "nginx"
   replicas: 2
@@ -103,12 +103,12 @@ spec:
 # kubectl  create -f dynamic.yaml
 # kubectl  get pvc
 NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS       AGE
-www-web-sts-0   Bound    pvc-64aba118-79d2-11e9-8bb5-000c29a5444f   50Mi       RWO            dynamic-ceph-rdb   23s
-www-web-sts-1   Bound    pvc-6e0483ae-79d2-11e9-8bb5-000c29a5444f   50Mi       RWO            dynamic-ceph-rdb   8s
+www-web-0   Bound    pvc-64aba118-79d2-11e9-8bb5-000c29a5444f   50Mi       RWO            dynamic-ceph-rdb   23s
+www-web-1   Bound    pvc-6e0483ae-79d2-11e9-8bb5-000c29a5444f   50Mi       RWO            dynamic-ceph-rdb   8s
 # kubectl  get pod -l app=nginx -o wide
 NAME        READY   STATUS    RESTARTS   AGE    IP           NODE             NOMINATED NODE
-web-sts-0   1/1     Running   0          116s   172.30.7.7   192.168.10.243   <none>
-web-sts-1   1/1     Running   0          101s   172.30.7.9   192.168.10.243   <none>
+web--0   1/1     Running   0          116s   172.30.7.7   192.168.10.243   <none>
+web--1   1/1     Running   0          101s   172.30.7.9   192.168.10.243   <none>
 ```
 
 #### 网络节点失效

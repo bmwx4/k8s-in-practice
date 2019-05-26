@@ -16,7 +16,9 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 克隆 k8s到本地:
 ```bash
-git clone -b v1.12.4 https://github.com/kubernetes/kubernetes.git
+#git clone -b v1.12.4 https://github.com/kubernetes/kubernetes.git
+或者：
+# git checkout tags/v1.12.8 -b 1.12.8
 路径为：
 $GOPATH/src/k8s.io/kubernetes
 ```

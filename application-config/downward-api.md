@@ -139,3 +139,12 @@ lrwxrwxrwx 1 root root 14 May 25 17:37 podName -> ..data/podName
 lrwxrwxrwx 1 root root 19 May 25 17:37 podNamespace -> ..data/podNamespace
 ```
 在元数据信息挂载到 /etc/downward 目录；
+
+思考，如何在pod中获取nodename?
+```yaml
+env:
+ - name: MY_NODE_NAME
+   valueFrom:
+     fieldRef:
+       fieldPath: spec.nodeName
+```

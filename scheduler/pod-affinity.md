@@ -4,7 +4,7 @@ nodeAffinity 机制只是影响了 pod 与 node 之间的亲和性，但是，�
 #### 应用 podAffinity
 比如一个后端pod和一组前端pod ，要求部署到同一个node上；首先部署一个后端pod:
 ```bash
-run backend -l app=backend --image=busybox --image-pull-policy=IfNotPresent -- sleep 1h
+kubectl run backend -l app=backend --image=busybox --image-pull-policy=IfNotPresent -- sleep 1h
 ```
 创建前端pod:
 ```yaml

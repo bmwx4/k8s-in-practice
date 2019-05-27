@@ -38,6 +38,7 @@ kind: Pod
 metadata:
   name: sysctl-example
 spec:
+  containers:
   - name: busybox
     image: busybox
     command: [ "sh", "-c", "sleep 1h" ]

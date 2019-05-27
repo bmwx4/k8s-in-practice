@@ -89,3 +89,7 @@
     1. [ceph-deploy](tasks/ceph-deploy.md)
     1. [rook](tasks/rook.md)
     1. [kubectl常用姿势](tasks/kubectl.md)
+
+## 感谢 !!!
+[@MrYueQ](https://github.com/MrYueQ)
+[@yangruiyou85](https://github.com/yangruiyou85)

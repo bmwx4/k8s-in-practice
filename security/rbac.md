@@ -219,8 +219,11 @@ subjects:
 
 ** 4. 配置 kubeconfig **
 
-准备好之后呢，就可以用 bmw-svc serviceaccount 访问我们的k8s集群了， 同时我们可以动态更改 Role 或 ClusterRole 的授权来及时控制某个账号的权限(这也是使用 serviceaccount 的好处)；
-配置应该如下:
+查看 kubeconfig,该命令返回生成 kubeconfig 条目所针对的所有集群的列表:
+```bash
+$ kubectl config view
+```
+下面就可以通过修改 kubeconfig，应用 bmw-svc serviceaccount 访问我们的k8s集群了，同时我们可以动态更改 Role 或 ClusterRole 的授权来及时控制某个账号的权限；配置修改如下，修改内容主要为添加 context 和 user:
 ```yaml
 ...
 - context:
@@ -241,23 +244,37 @@ users:
   user:
     token: xxxx
 ```
+
+查看 kubectl 所有上下文
+```bash
+kubectl config get-current
+```
+
+查看 kubectl 的当前上下文
+```bash
+kubectl config current-context
+```
+
 切换context:
 ```bash
 $ kubectl  config use-context bmw-svc
 ```
+
 验证：
 ```bash
 $ kubectl  get pod
 error: You must be logged in to the server (Unauthorized)
 ```
-说明验证失败，错误的可能性是 secret的token没有进行base64 解码，这个时候也可以切换回去，比如：
+说明认证用户失败，错误的可能性是 secret 的token没有进行 base64 解码，这个时候也可以切换回去，比如：
 ```bash
 $ kubectl  config use-context kubernetes
 ```
-解码修复之后继续测试:
+base64 解码修复之后继续测试:
 ```bash
 $ echo -n 'ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklpSjkuZXlKcGMzTWlPaUpyZFdKbGNtNWxkR1Z6TDNObGNuWnBZMlZoWTJOdmRXNTBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5dVlXMWxjM0JoWTJVaU9pSmtaV1poZFd4MElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl6WldOeVpYUXVibUZ0WlNJNkltSnRkeTF6ZG1NdGRHOXJaVzR0T0dZNWFuTWlMQ0pyZFdKbGNtNWxkR1Z6TG1sdkwzTmxjblpwWTJWaFkyTnZkVzUwTDNObGNuWnBZMlV0WVdOamIzVnVkQzV1WVcxbElqb2lZbTEzTFhOMll5SXNJbXQxWW1WeWJtVjBaWE11YVc4dmMyVnlkbWxqWldGalkyOTFiblF2YzJWeWRtbGpaUzFoWTJOdmRXNTBMblZwWkNJNklqaGxaVGM1TmpFMkxUYzRPVFl0TVRGbE9TMDRZbUkxTFRBd01HTXlPV0UxTkRRMFppSXNJbk4xWWlJNkluTjVjM1JsYlRwelpYSjJhV05sWVdOamIzVnVkRHBrWldaaGRXeDBPbUp0ZHkxemRtTWlmUS52YmRDNnVEdGFvMDNDWng2ZXNrbGtkNG5UMktQOFI1S3AzOHA3ZUZILVNIWFp6WkRkNG93bUR5cnAzVlF6NkxYeTFfUXRCd25Pc25vQ0lFQ0xPc0YtaXNFVnBaY2k0N1J0UnlzcmtOdTNsMlZkSUFDWGc2dEw4ZVBmZUF1VlJ3US1wUjFueEdlNmdPRU1ybDJKTS1LcmVFNW41Zm9oYVZ3MWVjRzZSendldC1pbnRJdUFaWW1aSi1sdG5sTGFnY1g1NFczOHR3SFdzaDNzd3czN2xSTUNqLVlMVWtXVExabk5rMkNwcWJjNTFvOVFSdDQ1WVUtR3hEX1ctckhlS0JUYWdpdXFjZHdfTDIyQ2UycHJqUGhDSzVuWkk2czJ1dXlkNlFBaUt0dlJHd3RvS205d1J1SEhESzRWellMNjhBdW8zSldncnd5X2VXaXpFRW1CNFF3d3c=' |base64 -d
+```
 把解码之后的token进行替换；
+```bash
 $ kubectl  config use-context bmw-svc
 $ kubectl  get pod
 NAME                 READY   STATUS    RESTARTS   AGE
@@ -267,6 +284,7 @@ test-emptydir        1/1     Unknown   0          5d4h
 $ kubectl  get secrets
 Error from server (Forbidden): secrets is forbidden: User "system:serviceaccount:default:bmw-svc" cannot list resource "secrets" in API group "" in the namespace "default"
 ```
+结果符合预期；
 --------
 #### 如何通过客户端证书定义 subjects：
 创建 bmw-csr.json 文件：

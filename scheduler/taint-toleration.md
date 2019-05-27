@@ -66,8 +66,8 @@ tolerations:
   operator: "Exists"
 ```
 
-#### 配置节点失效之后的pod重新调度最长等待时间
-如果给一个节点添加了一个 effect 值为 NoExecute 的 taint，则任何不能忍受这个 taint 的 pod 都会马上被驱逐，任何可以忍受这个 taint 的 pod 都不会被驱逐。但是，如果 pod 存在一个 effect 值为 NoExecute 的 toleration 指定了可选属性 tolerationSeconds 的值，则表示在给节点添加了上述 taint 之后，pod 还能继续在节点上运行的时间。例如，
+#### 配置 Node 失效之后的pod重新调度最长等待时间
+如果给一个 Node 添加了一个 effect 值为 NoExecute 的 taint，则任何不能忍受这个 taint 的 pod 都会马上被驱逐；任何可以容忍这个 taint 的 pod 都不会被驱逐。但是，如果 pod 存在一个 effect 值为 NoExecute 的 toleration 指定了可选属性 tolerationSeconds 的值，则表示在给节点添加了上述与其匹配的 taint 之后，pod 还能继续在节点上运行的时间。例如，
 ```yaml
 tolerations:
 - key: "key1"
@@ -76,5 +76,8 @@ tolerations:
   effect: "NoExecute"
   tolerationSeconds: 3600
 ```
-这表示如果这个 pod 正在运行，然后一个匹配的 taint 被添加到其所在的节点，那么 pod 还将继续在节点上运行 3600 秒，然后被驱逐。如果在此之前上述 taint 被删除了，则 pod 不会被驱逐。
+
+这表示如果这个 pod 正在运行，然后一个匹配的 taint 与被添加到该pod所在node的taint相同，那么 pod 还将继续在节点上运行 3600 秒，然后被驱逐。如果在此之前上述 taint 被删除了，则 pod 不会被驱逐。
+
+
 >PS: 基于 污点信息 驱逐 pod 的功能不是默认开启的， 如果要启用这个特性，需要运行 kube-controller-manager时，使用 --feature-gates=TaintBasedEvictions=true 选项;

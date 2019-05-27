@@ -1,5 +1,6 @@
 # downward-api
-在生产环境中， 有些业务或者管理员希望通过在容器内部想知道pod的IP、主机名或者pod自身的名称(rc/rs等)，此外还有pod的labels和annontations,对于此类问题，k8s 提供了 downward API来解决。 downward API 允许我们通过环境变量或者文件的形式传递 pod 的元数据。比如:
+在生产环境中， 有些业务或者管理员希望通过在容器内部想知道 pod 的IP、主机名或者pod自身的名称(rc/rs等)，此外还有pod的labels和annontations,对于此类问题，k8s 提供了 downward API来解决。 downward API 允许我们通过环境变量或者文件的形式传递 pod 的元数据。比如:
+
 ```
 pod 的名称
 pod 的ip
@@ -11,6 +12,7 @@ pod 运行所属的 serviceAccount 名称
 pod 的 labels
 pod 的 annontations
 ```
+
 #### 通过环境变量暴露元数据
 ```yaml
 # downward-env.yaml
@@ -23,7 +25,7 @@ spec:
   - name: main
     image: busybox
     imagePullPolicy: IfNotPresent
-    command: ["sleep", "9999999"]
+    command: ["sleep", "1h"]
     resources:
       requests:
         cpu: 15m
@@ -148,3 +150,4 @@ env:
      fieldRef:
        fieldPath: spec.nodeName
 ```
+目前不能通过 volume 方式获取 nodeName；

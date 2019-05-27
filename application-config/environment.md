@@ -53,3 +53,8 @@ spec:
   - name: html
     emptyDir: {}
 ```
+
+验证测试, 可以通过查看容器标准输出日志查看参数传递是否成功:
+```bash
+$  kubectl logs fortune2s -c html-generator
+```

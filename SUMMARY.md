@@ -85,3 +85,4 @@
     1. [jenkins](tasks/jenkins.md)
     1. [ceph-deploy](tasks/ceph-deploy.md)
     1. [rook](tasks/rook.md)
+    1. [kubectl常用姿势](tasks/kubectl.md)

@@ -11,16 +11,33 @@ CMD: 指定传递给 ENTRYPOINT 的参数.
 FROM ubuntu:latest
 
 RUN apt-get update ; apt-get -y install fortune
-ADD fortuneloop.sh /bin/fortuneloop.sh
+ADD fortunloop.sh /bin/fortunloop.sh
 
-ENTRYPOINT ["/bin/fortuneloop.sh"]
+ENTRYPOINT ["/bin/fortunloop.sh"]
 CMD ["10"]
 ```
-构建镜像:
+fortunloop.sh 脚本内容如下:
+```bash
+#!/bin/bash
+trap "exit" SIGINT
+
+INTERVAL=$1
+echo Configured to generate new fortune every $INTERVAL seconds
+
+mkdir -p /var/htdocs
+
+while :
+do
+  echo $(date) Writing fortune to /var/htdocs/index.html
+  /usr/games/fortune > /var/htdocs/index.html
+  sleep $INTERVAL
+done
+```
+构建本地镜像:
 ```bash
 docker build -t luksa/fortune:args .
 ```
-使用 k8s 如何覆盖命令和参数
+使用 k8s 如何覆盖命令和参数的样例:
 ```yaml
 #kugo.yaml
 apiVersion: v1
@@ -70,10 +87,16 @@ spec:
   - name: html
     emptyDir: {}
 ```
+
 数组也可以表示成:
 ```yaml
 args:
 - foo
 - bar
 - 15
+```
+
+验证测试, 可以通过查看容器标准输出日志查看参数传递是否成功:
+```bash
+$  kubectl logs fortune2s -c html-generator
 ```

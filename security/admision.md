@@ -5,6 +5,7 @@ k8s 已经提供了  authentication/authorization，而且前面我们已经了�
 1. authentication/authorization 是 Kubernetes 的认证鉴权，运行在 filter 中，只能获取 http 请求 header 以及证书，并不能获取请求的 body。所以 authn/authz 只能对客户端进行认证和鉴权，不可以对请求的对象进行任何操作，因为这里根本还获取不到对象。
 2. Admission 运行在 API Server 的增删改查 handler 中，在对对象被持久化之前，拦截对 API Server的请求，它可以自然地操作 API resource。
 ```
+
 #### Admission Controller Workflow:
 API Server 接收到客户端请求后首先进行认证和鉴权，认证鉴权通过后才会进行后续的endpoint handler处理。
 ![workflow](/images/admission-controller-phases.png)
@@ -17,7 +18,8 @@ API Server 接收到客户端请求后首先进行认证和鉴权，认证鉴权
 5. Admission Controller validate，可以自定义任何的对象校验规则。
 6. internal object 转化为 versioned object，并且持久化存储到etcd。
 ```
-#### Admission Controller Default
+
+#### Default Admission Controller
 对pod的改动通过一个被称为Admission Controller的插件来实现。它是apiserver的一部分。 当pod被创建或更新时，它会同步地修改pod。 当该插件处于激活状态(在大多数发行版中都是默认的)，当pod被创建或更新时它会进行以下动作
 ```
 1. 如果该 pod 没有 ServiceAccount 设置，将其 ServiceAccount 设为 default;
@@ -26,6 +28,7 @@ API Server 接收到客户端请求后首先进行认证和鉴权，认证鉴权
 4. 将一个包含用于API访问的token的 volume 添加到pod中。
 5. 将挂载于 /var/run/secrets/kubernetes.io/serviceaccount 的 volumeSource 添加到pod下的每个容器中。
 ```
+
 比如：
 ```yaml
 spec:
@@ -93,12 +96,12 @@ kubernetes 1.10+ 的版本，官方推荐如下:
 --enable-admission-plugins=NamespaceLifecycle,NamespaceExists,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
 ```
 ***PS:***
->--admission-control配置的控制器列表是有顺序的，越靠前的越先执行，一旦某个控制器返回的结果是reject的，那么整个准入控制阶段立刻结束，所以配置顺序可能会影响你的预期或性能。
+>--admission-control 配置的控制器列表是有顺序的，越靠前的越先执行，一旦某个控制器返回的结果是reject的，那么整个准入控制阶段立刻结束，所以配置顺序可能会影响你的预期或性能。
 
 #### Dynamic Admission webhook
 Kubernetes 提供了很多的准入控制器，但是也不可能满足所有用户的需求,因此Kubernetes提供了Dynamic Admission Controller机制，让大家可以根据个性化需求来开发自己的 Admission Controller,自定义的好处是你一旦更新你的 Admission Controller，不需要重启 kube-apiserver；如果 master 做了HA，更新 kube-apiserver 配置时就不存在幂等问题了，影响很小:
 ```
-Initializers: 允许你可以强制对某些请求或者所有请求都进行校验或者修改操作，比如添加sidecar、校验 secret 长度或者添加测试lable等,默认disable；
+Initializers: 允许你可以强制对某些请求或者所有请求都进行校验或者修改操作，比如添加 sidecar、校验 secret 长度或者添加测试 lable 等, 默认disable；
 MutatingAdmissionWebhook 允许你在webhook中对object进行mutate修改，默认enable；
 ValidatingAdmissionWebhook 只返回 validate 的结果为true 或者 false, 不允许在 webhook 中对 Object 进行修改，默认enable；
 ```

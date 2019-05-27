@@ -1,6 +1,6 @@
 # securityContext
 
-在运行容器时，有时候需要使用sysctl修改内核参数，比如( net.、vm.、kernel )等，容器里执行sysctl 这个操作需要容器拥有超级权限(特权)，容器启动时加上 --privileged 参数即可；在 kubernetes 中可以通过 Security Context 配置，来提高容器的安全能力。kubernetes 提供了三种配置 Security Context的方法：
+在运行容器时，容器启动时加上 --privileged 参数就可以给容器加上特权，使容器和node中root用户一样；在 kubernetes 中可以通过 Security Context 配置，来提高容器的安全能力。kubernetes 提供了三种配置 Security Context的方法：
 ```
 Container-level Security Context：仅应用到指定的容器
 Pod-level Security Context：应用到 Pod 内所有容器以及Volume
@@ -156,6 +156,7 @@ spec:
   volumes:
   - '*'
 ```
+
 **然后需要创建一个ClusteRole，并且赋予该Role对上述psp对使用权**
 ```yaml
 #privileged-psp.yaml
@@ -174,6 +175,7 @@ rules:
   verbs:
   - use
 ```
+
 **再建立一个 rolebinding 到 admin用户:**
 ```yaml
 #rolebing-privileged-psp.yaml
@@ -242,7 +244,10 @@ CapPrm: 00000000a80435fb
 CapEff: 00000000a80435fb
 ....
 ```
-也可以通过 iptables 命令来验证测试；  
+也可以在容器内部通过 iptables 命令来验证测试；  
+```bash
+kubectl  exec -it capabilities -- iptables -L
+```
 
 capabilities也包含了3个集合：
 ```

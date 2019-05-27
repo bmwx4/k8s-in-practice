@@ -2,7 +2,7 @@
 顾名思义， secret 作为 k8s 的一种对象资源，用来存储密钥、token等敏感信息，但是 secret 里的数据部分都是经过 base64 编码的，没有启动实质性安全的作用。
 
 #### 应用 secret
-前面介绍ceph的时候，以及在介绍serviceAccount的时候， 已经应用过secret了，那么还有一种场景就是，如何从私有镜像仓库下载镜像;
+前面介绍ceph的时候，以及在介绍 serviceAccount 的时候， 已经应用过secret了，那么还有一种场景就是，如何从私有镜像仓库下载镜像;
 
 **创建secret:**  
 ```
@@ -23,6 +23,7 @@ metadata:
   uid: d66a8d7a-7f0d-11e9-8e54-000c29a5444f
 type: kubernetes.io/dockerconfigjson
 ```
+
 **在pod中应用 secret**
 ```yaml
 apiVersion: v1

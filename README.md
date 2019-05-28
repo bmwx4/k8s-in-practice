@@ -90,6 +90,9 @@
     1. [rook](tasks/rook.md)
     1. [kubectl常用姿势](tasks/kubectl.md)
 
-## 感谢 !!!
-[@MrYueQ](https://github.com/MrYueQ)
+## **Slogan**
+#### ***Benefit from open source and contribute to the community***
+
+## **Contributors !!!**
+[@MrYueQ](https://github.com/MrYueQ)  
 [@yangruiyou85](https://github.com/yangruiyou85)

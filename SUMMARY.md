@@ -86,3 +86,4 @@
     1. [ceph-deploy](tasks/ceph-deploy.md)
     1. [rook](tasks/rook.md)
     1. [kubectl常用姿势](tasks/kubectl.md)
+    1. [kubelet 集成 containerd](tasks/containerd.md)

@@ -90,6 +90,7 @@
     1. [rook](tasks/rook.md)
     1. [kubectl常用姿势](tasks/kubectl.md)
     1. [kubelet cri 集成 containerd](tasks/containerd.md)
+    1. [helm3](tasks/helm3.md)
 
 ## **Slogan**
 #### ***Benefit from open source and contribute to the community***

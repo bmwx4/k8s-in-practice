@@ -6,3 +6,5 @@
 | 更新 pod/node 的 annotations | kubectl annotate pod ${podName} ${podAnnontations}=${value} --overwirte | 如果已存在 Annontations，通过 --overwirte 选项覆盖|
 | 更新 pod/node 的 labels | kubectl label pod ${podName} ${podLabel}=${value} --overwirte |如果已存在该 label ，通过 --overwirte 选项覆盖|
 |获取指定 kubelet 版本的 node 名称| bash kubectl get no -o json &#124; jq -r '.items[] &#124;  select(.status.nodeInfo.kubeletVersion=="v1.12.4-41+1a17526c9ecfae") &#124; .metadata.name' | Reserved |
+|设置默认的storageclass|kubectl patch storageclass <your-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'|需要在apiserver上添加DefaultStorageClass adminssion,然后替换class-name即可|
+

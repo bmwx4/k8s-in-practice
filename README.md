@@ -1,5 +1,8 @@
 # Introduction
 
+## **Slogan**
+#### ***Benefit from open source and contribute to the community***
+
 # k8s-in-practice
 
 ## Summary
@@ -91,9 +94,7 @@
     1. [kubectl常用姿势](tasks/kubectl.md)
     1. [kubelet cri 集成 containerd](tasks/containerd.md)
     1. [helm3](tasks/helm3.md)
-
-## **Slogan**
-#### ***Benefit from open source and contribute to the community***
+    1. [本地测试环境搭建](tasks/local_cluster_up.md)
 
 ## **Contributors !!!**
 [@MrYueQ](https://github.com/MrYueQ)  

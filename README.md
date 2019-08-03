@@ -25,7 +25,7 @@
     1. [05-4.pod-limit-range-cpu](resource-quotas/pod-limit-range-cpu.md)
     1. [05-5.pod-cpu-mem-quota](resource-quotas/pod-cpu-mem-quota.md)
     1. [05-6.pod-count-quota](resource-quotas/pod-count-quota.md)
-    2. [05-7.pod-extentd-resource](resource-quotas/pod-extentd-resources.md)
+    2. [05-7.pod-extentd-resource](resource-quotas/pod-extend-resources.md)
 
 1. [06.workload](workload/workload.md)
     1. [06-1.replicacontroller](workload/replicacontroller.md)

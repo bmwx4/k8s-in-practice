@@ -1,10 +1,10 @@
 # K8S Remote Debug
-借住 go程序的debug 方式，以及 goland IDE，我们可以结合这两个工具对k8s组价进行远程debug
+借住 go程序的debug 方式，以及 goland IDE，我们可以结合这两个工具对k8s组价进行远程debug，对于本地测试开发环境以及 dlv debug工具的使用，我已经整理完了，大家往下看:
 
 ### 环境搭建
 1. k8s 测试环境搭建可以参考 [K8S本地测试环境搭建](/tasks/local_cluster_up.md)  
 2. dlv 环境可以参考 [dlv环境搭建](/tasks/go_debug.md)  
-3. goland 安装，下载安装个包，破解一下就行了;
+3. goland 安装，官网下载安装个包，破解一下就行了;
 
 ### 远程调试
 将 k8s 测试环境中的代码，在本地同步一份,切换到你要测试的branch:
@@ -14,6 +14,8 @@ $ git branch
 * v1.15.1
 ```
 ### 配置IDE
+配置IDE部分主要是配置个远程debug:
+![config](/images/config_debug.png)
 
 ### 启动k8s
 这一步需要单独编译 k8s 组件，而且编译时也要带符号信息的debug版本:
@@ -26,6 +28,7 @@ _output/bin/kube-apiserver: ELF 64-bit LSB executable, x86-64, version 1 (SYSV),
 ```bash
 #./hack/local-up-cluster.sh -O
 ```
+
 启动调试:
 ```bash
 # ps aux | grep kube-apiserver | grep -v grep
@@ -38,7 +41,7 @@ debug 模式启动:
 输出:
 API server listening at: [::]:2345
 ```
-这时你回到IDE ，设置断点：
+这时你回到IDE，设置断点：
 ![set_bp](/images/set_breakpoint.png)
 然后开启debug, 下面会显示已经连接到远程dlv server:
 ![connect](/images/connect_dlv.png)

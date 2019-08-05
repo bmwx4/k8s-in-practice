@@ -1,11 +1,11 @@
 ## 本地测试环境搭建
-我们经常想在本地用一个虚拟机来方便的进行k8s测试，或者你也可以远程调试，[参考](/tasks/k8s-debug.md)，
+我们经常想在本地用一个虚拟机来方便的进行k8s测试，或者你也可以远程调试，调试方式请[参考](/tasks/k8s_debug.md)，
 
 ### 环境准备
 对于一个k8s的运行环境，在k8s-install 那部分的第一章节已经介绍到了，按照[系统初始化和全局变量
 ](https://github.com/bmwx4/k8s-install/blob/v1.12/os-init.md)来准备就可以，另外需要安装docker, etcd, 证书生成工具以及 golang 的开发环境.
 ### 1.  docker安装
-可以参考这篇文章: https://github.com/bmwx4/k8s-install/blob/v1.12/docker.md， 也可以使用yum 安装并启动；
+可以参考这篇文章: https://github.com/bmwx4/k8s-install/blob/v1.12/docker.md ， 也可以使用yum 安装并启动；
 
 ### 2. etcd 安装
 不需要你去把etcd服务run起来，把二进制放入到你的$PATH里就可以了:

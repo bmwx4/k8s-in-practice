@@ -95,6 +95,8 @@
     1. [kubelet cri 集成 containerd](tasks/containerd.md)
     1. [helm3](tasks/helm3.md)
     1. [本地测试环境搭建](tasks/local_cluster_up.md)
+    1. [Go 程序 Debug](tasks/go_debug.md)
+    1. [K8S 远程Debug](tasks/k8s_debug.md)
 
 ## **Contributors !!!**
 [@MrYueQ](https://github.com/MrYueQ)  
